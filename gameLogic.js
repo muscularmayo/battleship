@@ -1,4 +1,5 @@
 function createShip (length) {
+
   const createShipState = function(length) {
     let state = [];
     for(let i = 0; i < length; i++) {

@@ -1,14 +1,17 @@
 const gameLogic = require('../gameLogic')
 
 describe('createShip does things', () => {
-let carrier;
-let cruiser;
-let destroyer;
-  beforeAll(() => {
+  let carrier;
+  let cruiser;
+  let destroyer;
+
+  beforeEach(() => {
     carrier = gameLogic.createShip(5)
     cruiser = gameLogic.createShip(3)
     destroyer = gameLogic.createShip(2)
   })
+
+
 
   test('createShip makes an object', () => {
     expect(typeof cruiser).toBe('object')
@@ -25,8 +28,8 @@ let destroyer;
   })
 
   test('createShip has a hit function that changes ship state', () => {
-    expect(cruiser.hit(0)).toBe([1,-1,-1])
-    expect(carrier.hit(0)).toBe([1,-1,-1,-1,-1])
+    expect(cruiser.hit(0)).toStrictEqual([1,-1,-1])
+    expect(carrier.hit(0)).toStrictEqual([1,-1,-1,-1,-1])
 
   })
 
@@ -35,9 +38,9 @@ let destroyer;
   })
 
   test('createShip creates a board state that is an array', () => {
-    expect(carrier.state).toEqual([-1,-1,-1,-1,-1])
-    expect(destroyer.state).toEqual([-1,-1])
-    expect([...cruiser.state]).toEqual([-1,-1,-1])
+    expect(carrier.state).toStrictEqual([-1,-1,-1,-1,-1])
+    expect(destroyer.state).toStrictEqual([-1,-1])
+    expect([...cruiser.state]).toStrictEqual([-1,-1,-1])
   })
 
   describe('createGameboard creates a gameboard', () => {
