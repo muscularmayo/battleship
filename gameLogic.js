@@ -29,10 +29,11 @@ function createShip (length) {
     } else if (length === 4) {
       shipName = 'battleship'
     } else if (length === 3) {
-      shipName = 'cruiser' || 'submarine'
+      shipName = 'cruiser'
     } else if  (length === 2) {
       shipName = 'destroyer'
     }
+    return shipName
   }
 
   const shipName = determineShipName(length)
