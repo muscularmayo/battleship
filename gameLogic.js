@@ -20,8 +20,8 @@ function createShip (length) {
     return state;
   }
 
-  const isSunk = function(state) {
-    if (state.includes(1)) {
+  const isSunk = function() {
+    if (this.state.includes(1)) {
       return false
     } else {
       return true;
@@ -48,6 +48,8 @@ function createShip (length) {
     length, state, isSunk, hit , shipName
   }
 }
+
+
 
 function createGameboard (home) {
   let gameboard = []

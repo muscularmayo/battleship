@@ -16,13 +16,23 @@ describe('createShip creates a few different types of ships', () => {
     destroyer = gameLogic.createShip(2)
   })
 
-
-
   test('createShip returns an object', () => {
     expect(typeof cruiser).toBe('object')
     expect(typeof carrier).toBe('object')
     expect(typeof destroyer).toBe('object')
 
+  })
+
+  test('createShip has a proper length property', () => {
+    expect(cruiser.length).toBe(3)
+    expect(destroyer.length).toBe(2)
+    expect(carrier.length).toBe(5)
+  })
+
+  test('createShip creates a board state that is an array', () => {
+    expect(carrier.state).toStrictEqual([1,1,1,1,1])
+    expect(destroyer.state).toStrictEqual([1,1])
+    expect(cruiser.state).toStrictEqual([1,1,1])
   })
 
   test('createShip returns different ships, represented by shipName, according to length', () => {
@@ -41,24 +51,15 @@ describe('createShip creates a few different types of ships', () => {
   })
 
   test('createShip has a isSunk function', () => {
-    expect(cruiser.isSunk(cruiser.state)).toBe(false)
+    expect(cruiser.isSunk()).toBe(false)
+    expect(destroyer.isSunk()).toBe(false)
+    destroyer.hit(1)
+    expect(destroyer.isSunk()).toBe(false)
+    destroyer.hit(0)
+    expect(destroyer.isSunk()).toBe(true)
   })
 
-  test('createShip creates a board state that is an array', () => {
-    expect(carrier.state).toStrictEqual([1,1,1,1,1])
-    expect(destroyer.state).toStrictEqual([1,1])
-    expect(cruiser.state).toStrictEqual([1,1,1])
-  })
 })
-
-
-
-
-
-
-
-
-
 
 
 describe('createGameboard creates a gameboard', () => {
@@ -88,6 +89,32 @@ describe('createGameboard creates a gameboard', () => {
     [0,0,0,0,0,0,0,0,0,0],
     [0,0,0,0,0,0,0,0,0,0]
   ]
+
+  let topLeftCornerAttackedGameboard = [
+    [-1,1,1,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0]
+  ]
+
+  let bottomLeftCornerAttackedGameboard = [
+    [-1,1,1,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0],
+    [-2,0,0,0,0,0,0,0,0,0]
+  ]
   let gameboard = gameLogic.createGameboard().gameboard
 
   test('createGameboard makes an array filled with 0\'s', () => {
@@ -98,6 +125,25 @@ describe('createGameboard creates a gameboard', () => {
     expect(gameboard.placeShip(0,0,true,3)).toStrictEqual(cruiserPlacedGameboard)
   })
 
+  test('gameboard has a receiveAttack function that changes board state in that position to position-2', () => {
+    expect(gameboard.receiveAttack(0,0)).toStrictEqual(topLeftCornerAttackedGameboard)
+    expect(gameboard.receiveAttack(0,9)).toStrictEqual(bottomLeftCornerAttackedGameboard)
+  })
+
+
+})
+
+describe('player is an object that tells us whether it\'s player1 or player2\'s turn', () => {
+  test('player is an object', () => {
+    expect(typeof player).toBe('object')
+  })
+
+  test('player has a property called player1Turn that is a boolean', () => {
+    expect(typeof player.player1Turn).toBe('boolean')
+  })
+})
+
+describe('gameState is a collection of ship,gameboard, and player state objects', () => {
 
 })
 
