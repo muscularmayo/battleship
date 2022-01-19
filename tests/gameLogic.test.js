@@ -20,7 +20,7 @@ describe('createShip does things', () => {
 
   })
 
-  test('createShip makes different ships', () => {
+  test('createShip makes different ships, represented by shipName, according to length', () => {
     expect(carrier.shipName).toBe('carrier')
     expect(cruiser.shipName).toBe('cruiser')
     expect(destroyer.shipName).toBe('destroyer')
@@ -28,8 +28,10 @@ describe('createShip does things', () => {
   })
 
   test('createShip has a hit function that changes ship state', () => {
-    expect(cruiser.hit(0)).toStrictEqual([1,-1,-1])
-    expect(carrier.hit(0)).toStrictEqual([1,-1,-1,-1,-1])
+    expect(cruiser.hit(0)).toStrictEqual([-1,1,1])
+    expect(carrier.hit(1)).toStrictEqual([1,-1,1,1,1])
+    expect(carrier.hit(2)).toStrictEqual([1,-1,-1,1,1])
+    expect(destroyer.hit(4).destroyer.hit(0)).toStrictEqual([-1,1,1,1,-1])
 
   })
 
@@ -40,7 +42,7 @@ describe('createShip does things', () => {
   test('createShip creates a board state that is an array', () => {
     expect(carrier.state).toStrictEqual([-1,-1,-1,-1,-1])
     expect(destroyer.state).toStrictEqual([-1,-1])
-    expect([...cruiser.state]).toStrictEqual([-1,-1,-1])
+    expect(cruiser.state).toStrictEqual([-1,-1,-1])
   })
 
   describe('createGameboard creates a gameboard', () => {
@@ -57,8 +59,26 @@ describe('createShip does things', () => {
       [0,0,0,0,0,0,0,0,0,0]
     ]
 
+    let cruiserPlacedGameboard = [
+      [-1,-1,-1,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0,0]
+    ]
+    let gameboard = gameLogic.createGameboard().gameboard
+
     test('createGameboard makes an array filled with 0\'s', () => {
-      expect(gameLogic.createGameboard().gameboard).toEqual(emptyGameboard)
+      expect(gameboard).toEqual(emptyGameboard)
+    })
+
+    test('createGameboard.place() will place a particular boat in a particular spot', () => {
+      expect(gameboard.placeShip(0,0,x,3)).toStrictEqual(cruiserPlacedGameboard)
     })
 
 
