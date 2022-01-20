@@ -115,10 +115,14 @@ describe('createGameboard creates a gameboard', () => {
     [0,0,0,0,0,0,0,0,0,0],
     [-2,0,0,0,0,0,0,0,0,0]
   ]
-  let gameboard = gameLogic.createGameboard().gameboard
+  let gameboard;
+
+  beforeEach(() => {
+    gameboard = gameLogic.createGameboard()
+  })
 
   test('createGameboard makes an array filled with 0\'s', () => {
-    expect(gameboard).toEqual(emptyGameboard)
+    expect(gameboard.gameboard).toEqual(emptyGameboard)
   })
 
   test('createGameboard.place() will place a particular boat in a particular spot', () => {
@@ -128,6 +132,12 @@ describe('createGameboard creates a gameboard', () => {
   test('gameboard has a receiveAttack function that changes board state in that position to position-2', () => {
     expect(gameboard.receiveAttack(0,0)).toStrictEqual(topLeftCornerAttackedGameboard)
     expect(gameboard.receiveAttack(0,9)).toStrictEqual(bottomLeftCornerAttackedGameboard)
+  })
+
+  test('gameboard will not place a ship that will overlap on another ship', () => {
+    expect(cruiserPlacedGameboard.placeShip(0,0,true)).toBe('error')
+    expect(cruiserPlacedGameboard.placeShip(0,1,false)).toBe('error')
+    expect(gameboard.placeShip(0))
   })
 
 
@@ -143,9 +153,15 @@ describe('player is an object that tells us whether it\'s player1 or player2\'s 
   })
 })
 
+/* focus on player/ships/board and then we will be good
 describe('gameState is a collection of ship,gameboard, and player state objects', () => {
+  beforeEach(()=> {
 
-})
+  })
+  test('gameState has 3 properties, player1, player2, and player1Turn', () => {
+
+  })
+})*/
 
 
 

@@ -1,4 +1,7 @@
 function createShip (length) {
+  if (length < 2 || length > 5) {
+    console.error('ship length must be between 2 & 5')
+  }
 
   const createShipState = function(length) {
     let state = [];
@@ -8,7 +11,6 @@ function createShip (length) {
     return state
   }
 
-  let state = createShipState(length)
 
 
   const hit = function (num) {
@@ -18,7 +20,7 @@ function createShip (length) {
     }
     state[num] -= 2;
     return state;
-  }
+  } // i need to link hit with coordinates to my board somehow
 
   const isSunk = function() {
     if (this.state.includes(1)) {
@@ -29,7 +31,7 @@ function createShip (length) {
   }
 
   const determineShipName = function(length) {
-    let shipName = ''
+    let shipName = 'unknown'
     if (length === 5) {
       shipName = 'carrier'
     } else if (length === 4) {
@@ -41,7 +43,7 @@ function createShip (length) {
     }
     return shipName
   }
-
+  let state = createShipState(length)
   const shipName = determineShipName(length)
 
   return {
@@ -49,15 +51,11 @@ function createShip (length) {
   }
 }
 
-
-
 function createGameboard (home) {
   let gameboard = []
-  for(let i = 0; i < 10; i++) {
-    gameboard[i] = []
-    for(let j = 0; j < 10; j++) {
-        gameboard[i][j] = 0;
-    }
+  //we're going to turn this into one array because board is always 10x10 no exceptions
+  for(let i = 0; i < 100; i++) {
+    gameboard[i] = 1;
   }
 
   let player;
@@ -67,18 +65,8 @@ function createGameboard (home) {
     player = 'away'
   }
 
-  const placeShip = function (y, x, horizontal, shipLength) {
-    if(placeShipCheck(y,x,shipLength)) {
-      if (horizontal) {
-        for(let i = x; i < x + shipLength; i++) {
-          gameboard[y][i] = 1
-        }
-      } else if (!horizontal) {
-        for(let i = y; i < y + shipLength; i++) {
-          gameboard[i][x] = 1
-        }
-      }
-    }
+  const placeShip = function (yx, horizontal, shipLength) {
+
   }
 
 
@@ -90,6 +78,11 @@ function createGameboard (home) {
 function createPlayer () {
 
 }
+
+/*
+function createGameState () {
+
+}*/
 
 module.exports = { createShip, createGameboard, createPlayer }
 
