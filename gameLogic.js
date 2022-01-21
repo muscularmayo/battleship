@@ -11,9 +11,14 @@ function createShip (length) {
     return state
   }
 
+  const coordinates = []
+
 
 
   const hit = function (num) {
+    //num is now going to be the coordinates of the board, and we will be using something like, this.coordinates.indexOf(num)
+    //this.coordinates will be an array of the coordinates we occupy with this specific ship
+    //
     if (state[num] === -2) {
       console.log('error, this spot has already been fired upon');
       return;
@@ -47,7 +52,7 @@ function createShip (length) {
   const shipName = determineShipName(length)
 
   return {
-    length, state, isSunk, hit , shipName
+    length, state, isSunk, hit , shipName , coordinates
   }
 }
 
@@ -65,8 +70,13 @@ function createGameboard (home) {
     player = 'away'
   }
 
-  const placeShip = function (yx, horizontal, shipLength) {
-
+  const placeShip = function (coords, horizontal, shipLength) {
+    //yx = row/col; this is the starting place for the ship we're putting down.
+    //placeship check
+    if(horizontal) {
+      for (let i = coords; i < coords + shiplength)
+    }
+    //this.gameboard[yx]
   }
 
 
@@ -88,7 +98,23 @@ module.exports = { createShip, createGameboard, createPlayer }
 
 /* ship output will look like
 
+{state: [1,1,1,1,1],
+shipName: 'carrier',
+length: 5,
+hit(coords) {
+  this.state[this.coordinates.indexOf(coords)] -= 2
+}
+isSunk() {
+  if(!this.state.includes(1)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+coordinates: [82,83,84,85,86]
 
+
+}
 
 
 */
