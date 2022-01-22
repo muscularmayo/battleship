@@ -96,6 +96,19 @@ describe('createGameboard creates a gameboard', () => {
     0,0,0,0,0,0,0,0,0,0
   ]
 
+  let verticalPlacedGameboard = [
+    1,1,1,0,0,0,0,0,0,0,
+    0,1,0,0,0,0,0,0,0,0,
+    0,1,0,0,0,0,0,0,0,0,
+    0,1,0,0,0,0,0,0,0,0,
+    0,0,0,0,0,0,0,0,0,0,
+    0,0,0,0,0,0,0,0,0,0,
+    0,0,0,0,0,0,0,0,0,0,
+    0,0,0,0,0,0,0,0,0,0,
+    0,0,0,0,0,0,0,0,0,0,
+    0,0,0,0,0,0,0,0,0,0
+  ]
+
   let topLeftCornerAttackedGameboard = [
     -1,1,1,0,0,0,0,0,0,0,
     0,0,0,0,0,0,0,0,0,0,
@@ -131,8 +144,10 @@ describe('createGameboard creates a gameboard', () => {
     expect(gameboard.gameboard).toEqual(emptyGameboard)
   })
 
-  test('createGameboard.place() will place a particular boat in a particular spot', () => {
+  test('createGameboard.place() will place a boat of certain length in a spot vertically or horizontally', () => {
     expect(gameboard.placeShip(0,true,3)).toStrictEqual(cruiserPlacedGameboard)
+    expect(gameboard.placeShip(11,false,3)).toStrictEqual(verticalPlacedGameboard)
+    expect(gameboard.placeShip(10,true,5)).toStrictEqual(false)
   })
 
   test('gameboard has a receiveAttack function that changes board state in that position to position-2', () => {

@@ -81,12 +81,13 @@ function createGameboard () {
     }
 
     if(horizontal) {
-      for (let i = coords; i < coords + shipLength; i++) {
-        this.gameboard[coords] = 1;
+      for (let i = coords; i < (coords + shipLength); i++) {
+        console.log(coords);
+        gameboard[i] = 1;
       }
     } else {
       for (let i = coords; i < coords + shipLength * 10; i = i + 10) {
-        this.gameboard[coords] = 1;
+        gameboard[i] = 1;
       }
     }
 
@@ -112,13 +113,17 @@ function createGameboard () {
       }
     }
   }
-  function checkPlacement (coords, shipLength, horizontal) {
+  function checkPlacement (coords, horizontal, shipLength) {
     if(horizontal) {
+      console.log(gameboard, coords)
       //we check if our column number (coord%10) <= (10 - shipLength)
       if (coords % 10 <= 10 - shipLength) {
+        console.log('first check passed')
         //then we need to check if every spot is currently a 0
         for(let i = coords; i < coords + shipLength; i++) {
+          console.log('in the loop', i, shipLength)
           if(gameboard[i] === 1) {
+            console.log('returning false')
             return false;
           }
         }
