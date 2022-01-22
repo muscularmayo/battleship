@@ -1,3 +1,4 @@
+
 function createShip (length) {
   if (length < 2 || length > 5) {
     console.error('ship length must be between 2 & 5')
@@ -57,34 +58,39 @@ function createShip (length) {
   }
 }
 
-function createGameboard (home) {
+function createGameboard () {
   const gameboard = []
   const shipContainer = []
 
   //we're going to turn this into one array because board is always 10x10 no exceptions
   for(let i = 0; i < 100; i++) {
-    gameboard[i] = 1;
+    gameboard[i] = 0;
   }
 
-  let player;
-  if(home) {
-    player = 'home'
-  } else {
-    player = 'away'
-  }
+
 
   const placeShip = function (coords, horizontal, shipLength) {
     //yx = row/col; this is the starting place for the ship we're putting down.
     //placeship check
+
+    const placeable = checkPlacement(coords, horizontal, shipLength)
+
+    if (!placeable) {
+      console.error('this ship cannot be placed')
+      return placeable;
+    }
+
     if(horizontal) {
-      for (let i = coords; i < coords + shipLength) {
-        gameboard[coords] = 1;
+      for (let i = coords; i < coords + shipLength; i++) {
+        this.gameboard[coords] = 1;
       }
     } else {
       for (let i = coords; i < coords + shipLength * 10; i = i + 10) {
-        gameboard[coords] = 1;
+        this.gameboard[coords] = 1;
       }
     }
+
+    return this.gameboard;
     //this.gameboard[yx]
   }
 
@@ -106,8 +112,37 @@ function createGameboard (home) {
       }
     }
   }
+  function checkPlacement (coords, shipLength, horizontal) {
+    if(horizontal) {
+      //we check if our column number (coord%10) <= (10 - shipLength)
+      if (coords % 10 <= 10 - shipLength) {
+        //then we need to check if every spot is currently a 0
+        for(let i = coords; i < coords + shipLength; i++) {
+          if(gameboard[i] === 1) {
+            return false;
+          }
+        }
+        return true;
+      }
+      return false;
+    } else if (!horizontal) { //aka vertical
+      //we check if our row number (Math.floor(coord/10) <= (10-shipLength)
+      if (Math.floor(coords/10) <= (10 - shipLength)) {
+        //check every 10th coord, representing a vertical line in a 10x10 grid
+        for(let i = coords; i < coords + shipLength * 10; i = i + 10) {
+          if(gameboard[i] === 1) {
+            return false;
+          }
+        }
+        return true;
+      }
+      return false;
+      //if it is it's good, else it's bad
+      //check if every spot is currently at 0, if it's not 0 then bad
+    }
+  }
 
-  return { gameboard , player, placeShip, shipContainer, receiveAttack};
+  return { gameboard , placeShip, shipContainer, receiveAttack};
 }
 
 function createPlayer () {

@@ -132,7 +132,7 @@ describe('createGameboard creates a gameboard', () => {
   })
 
   test('createGameboard.place() will place a particular boat in a particular spot', () => {
-    expect(gameboard.placeShip(0,0,true,3)).toStrictEqual(cruiserPlacedGameboard)
+    expect(gameboard.placeShip(0,true,3)).toStrictEqual(cruiserPlacedGameboard)
   })
 
   test('gameboard has a receiveAttack function that changes board state in that position to position-2', () => {
