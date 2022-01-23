@@ -134,6 +134,20 @@ describe('createGameboard creates a gameboard', () => {
     0,0,0,0,0,0,0,0,0,0,
     -2,0,0,0,0,0,0,0,0,0
   ]
+
+  let carrierPlacedGameboard = [
+    0,0,0,0,0,0,0,0,0,0,
+    0,0,0,0,0,0,0,0,0,0,
+    0,0,0,0,0,1,1,1,1,1,
+    0,0,0,0,0,0,0,0,0,0,
+    0,0,0,0,0,0,0,0,0,0,
+    0,0,0,0,0,0,0,0,0,0,
+    0,0,0,0,0,0,0,0,0,0,
+    0,0,0,0,0,0,0,0,0,0,
+    0,0,0,0,0,0,0,0,0,0,
+    0,0,0,0,0,0,0,0,0,0
+  ]
+
   let gameboard;
 
   beforeEach(() => {
@@ -148,6 +162,9 @@ describe('createGameboard creates a gameboard', () => {
     expect(gameboard.placeShip(0,true,'cruiser')).toStrictEqual(cruiserPlacedGameboard)
     expect(gameboard.placeShip(11,false,'submarine')).toStrictEqual(verticalPlacedGameboard)
     expect(gameboard.placeShip(10,true,'carrier')).toStrictEqual('error')
+    expect(gameboard.placeShip(26,true,'carrier')).toStrictEqual('error')
+    expect(gameboard.placeShip(25,true,'carrier')).toStrictEqual(carrierPlacedGameboard)
+
   })
 
   /*test('gameboard has a receiveAttack function that changes board state in that position to position-2', () => {
@@ -156,7 +173,7 @@ describe('createGameboard creates a gameboard', () => {
   })*/
 
   test('gameboard will not place a ship that will overlap on another ship', () => {
-    gameboard.placeShip(0,0,'cruiser')
+    gameboard.placeShip(0,true,'cruiser')
     expect(gameboard.placeShip(0,true,'destroyer')).toBe('error')
     expect(gameboard.placeShip(0,false,'submarine')).toBe('error')
   })
