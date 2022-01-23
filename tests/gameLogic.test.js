@@ -68,7 +68,7 @@ describe('createShip creates a few different types of ships', () => {
 })
 
 
-describe('createGameboard creates a gameboard', () => {
+describe('createGameboard creates a gameboard with functions/containers', () => {
 
   let emptyGameboard = [
     0,0,0,0,0,0,0,0,0,0,
@@ -158,14 +158,18 @@ describe('createGameboard creates a gameboard', () => {
     expect(gameboard.gameboard).toEqual(emptyGameboard)
   })
 
-  test('createGameboard.place() will place a boat of certain length in a spot vertically or horizontally', () => {
+  test('createGameboard.placeShip() will place a boat of certain length in a spot vertically or horizontally', () => {
     expect(gameboard.placeShip(0,true,'cruiser')).toStrictEqual(cruiserPlacedGameboard)
     expect(gameboard.placeShip(11,false,'submarine')).toStrictEqual(verticalPlacedGameboard)
     expect(gameboard.placeShip(10,true,'carrier')).toStrictEqual('error')
     expect(gameboard.placeShip(26,true,'carrier')).toStrictEqual('error')
     expect(gameboard.placeShip(25,true,'carrier')).toStrictEqual(carrierPlacedGameboard)
+  })
+
+  test('gameboard changes the ship\'s coordinates after it uses placeShip()', () => {
 
   })
+
 
   /*test('gameboard has a receiveAttack function that changes board state in that position to position-2', () => {
     expect(gameboard.receiveAttack(0,0)).toStrictEqual(topLeftCornerAttackedGameboard)
