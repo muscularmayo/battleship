@@ -1,7 +1,15 @@
-
-function createShip (length) {
-  if (length < 2 || length > 5) {
-    console.error('ship length must be between 2 & 5')
+function createShip (shipName) {
+  let length;
+  if(shipName === 'destroyer') {
+    length = 2;
+  } else if (shipName === 'submarine') {
+    length = 3;
+  } else if (shipName === 'cruiser') {
+    length = 3;
+  } else if (shipName === 'battleship') {
+    length = 4;
+  } else if (shipName === 'carrier') {
+    length = 5;
   }
 
   const createShipState = function(length) {
@@ -35,32 +43,17 @@ function createShip (length) {
       return true;
     }
   }
-
-  const determineShipName = function(length) {
-    let shipName = 'unknown'
-    if (length === 5) {
-      shipName = 'carrier'
-    } else if (length === 4) {
-      shipName = 'battleship'
-    } else if (length === 3) {
-      shipName = 'cruiser' || 'submarine'
-    } else if  (length === 2) {
-      shipName = 'destroyer'
-    }
-    return shipName
-  }
-
   const state = createShipState(length)
-  const shipName = determineShipName(length)
 
   return {
-    length, state, isSunk, hit , shipName , coordinates
+    length, state, isSunk, hit , coordinates , shipName
   }
 }
 
+
 function createGameboard () {
   const gameboard = []
-  const shipContainer = []
+  const shipContainer = {}
 
   //we're going to turn this into one array because board is always 10x10 no exceptions
   for(let i = 0; i < 100; i++) {
@@ -69,15 +62,16 @@ function createGameboard () {
 
 
 
-  const placeShip = function (coords, horizontal, shipLength) {
-    //yx = row/col; this is the starting place for the ship we're putting down.
+  const placeShip = function (coords, horizontal, shipName) {
     //placeship check
+
+    const shipLength = this.shipContainer[shipName].length;
 
     const placeable = checkPlacement(coords, horizontal, shipLength)
 
     if (!placeable) {
       console.error('this ship cannot be placed')
-      return placeable;
+      return 'error';
     }
 
     if(horizontal) {
@@ -96,11 +90,12 @@ function createGameboard () {
   }
 
   function fillShipContainer () {
-    shipContainer.push(createShip(2))
-    shipContainer.push(createShip(3))
-    shipContainer.push(createShip(3))
-    shipContainer.push(createShip(4))
-    shipContainer.push(createShip(5))
+    shipContainer.carrier = createShip('carrier')
+    shipContainer.battleship = createShip('battleship')
+    shipContainer.cruiser = createShip('cruiser')
+    shipContainer.submarine = createShip('submarine')
+    shipContainer.destroyer = createShip('destroyer')
+
   }
   fillShipContainer();
 

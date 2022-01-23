@@ -11,9 +11,9 @@ describe('createShip creates a few different types of ships', () => {
   let destroyer;
 
   beforeEach(() => {
-    carrier = gameLogic.createShip(5)
-    cruiser = gameLogic.createShip(3)
-    destroyer = gameLogic.createShip(2)
+    carrier = gameLogic.createShip('carrier')
+    cruiser = gameLogic.createShip('cruiser')
+    destroyer = gameLogic.createShip('destroyer')
   })
 
   test('createShip returns an object', () => {
@@ -145,20 +145,20 @@ describe('createGameboard creates a gameboard', () => {
   })
 
   test('createGameboard.place() will place a boat of certain length in a spot vertically or horizontally', () => {
-    expect(gameboard.placeShip(0,true,3)).toStrictEqual(cruiserPlacedGameboard)
-    expect(gameboard.placeShip(11,false,3)).toStrictEqual(verticalPlacedGameboard)
-    expect(gameboard.placeShip(10,true,5)).toStrictEqual(false)
+    expect(gameboard.placeShip(0,true,'cruiser')).toStrictEqual(cruiserPlacedGameboard)
+    expect(gameboard.placeShip(11,false,'submarine')).toStrictEqual(verticalPlacedGameboard)
+    expect(gameboard.placeShip(10,true,'carrier')).toStrictEqual('error')
   })
 
-  test('gameboard has a receiveAttack function that changes board state in that position to position-2', () => {
+  /*test('gameboard has a receiveAttack function that changes board state in that position to position-2', () => {
     expect(gameboard.receiveAttack(0,0)).toStrictEqual(topLeftCornerAttackedGameboard)
     expect(gameboard.receiveAttack(0,9)).toStrictEqual(bottomLeftCornerAttackedGameboard)
-  })
+  })*/
 
   test('gameboard will not place a ship that will overlap on another ship', () => {
-    expect(cruiserPlacedGameboard.placeShip(0,0,true)).toBe('error')
-    expect(cruiserPlacedGameboard.placeShip(0,1,false)).toBe('error')
-    expect(gameboard.placeShip(0))
+    gameboard.placeShip(0,0,'cruiser')
+    expect(gameboard.placeShip(0,true,'destroyer')).toBe('error')
+    expect(gameboard.placeShip(0,false,'submarine')).toBe('error')
   })
 
 
