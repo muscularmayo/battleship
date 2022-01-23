@@ -68,6 +68,7 @@ function createGameboard () {
     const shipLength = this.shipContainer[shipName].length;
 
     const placeable = checkPlacement(coords, horizontal, shipLength)
+    console.log(shipLength, placeable)
 
     if (!placeable) {
       console.error('this ship cannot be placed')
@@ -76,7 +77,7 @@ function createGameboard () {
 
     if(horizontal) {
       for (let i = coords; i < (coords + shipLength); i++) {
-        console.log(coords);
+        console.log(coords, i);
         gameboard[i] = 1;
       }
     } else {
@@ -98,6 +99,7 @@ function createGameboard () {
 
   }
   fillShipContainer();
+  console.log(shipContainer)
 
   function receiveAttack (coords) {
     for (let i = 0; i < shipContainer.length; i++) {
