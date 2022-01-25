@@ -27,9 +27,9 @@ function createShip (shipName) {
   const hit = function (num) {
     //num is now going to be the coordinates of the board, and we will be using something like, this.coordinates.indexOf(num)
     //this.coordinates will be an array of the coordinates we occupy with this specific ship
-    if (state[num] === -2 || state[num] === -1) {
-      console.log('error, this spot has already been fired upon');
-      return;
+    if (this.state[num] === -1) {
+      console.error('error, this spot has already been fired upon');
+      return 'error';
     }
     state[num] -= 2;
     return state;
@@ -66,7 +66,7 @@ function createGameboard () {
     //placeship check
 
     const shipLength = this.shipContainer[shipName].length;
-
+    console.log(this.shipContainer)
     const placeable = checkPlacement(coords, horizontal, shipLength)
     console.log(shipLength, placeable)
 
@@ -75,7 +75,11 @@ function createGameboard () {
       return 'error';
     }
 
-    if(horizontal) {
+    if (this.shipContainer[shipName].coordinates.length > 0) {
+      this.shipContainer[shipName].coordinates = []
+    }
+
+    if (horizontal) {
       for (let i = coords; i < (coords + shipLength); i++) {
         console.log(coords, i);
         this.shipContainer[shipName].coordinates.push(i)
@@ -117,12 +121,9 @@ function createGameboard () {
       console.log(gameboard, coords)
       //we check if our column number (coord%10) <= (10 - shipLength)
       if (coords % 10 <= 10 - shipLength) {
-        console.log('first check passed')
         //then we need to check if every spot is currently a 0
         for(let i = coords; i < coords + shipLength; i++) {
-          console.log('in the loop', i, shipLength)
           if(gameboard[i] === 1) {
-            console.log('returning false')
             return false;
           }
         }

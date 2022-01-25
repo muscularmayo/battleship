@@ -9,11 +9,13 @@ describe('createShip creates a few different types of ships', () => {
   let carrier;
   let cruiser;
   let destroyer;
+  let unknown;
 
   beforeEach(() => {
     carrier = gameLogic.createShip('carrier')
     cruiser = gameLogic.createShip('cruiser')
     destroyer = gameLogic.createShip('destroyer')
+    unknown = gameLogic.createShip('whatever')
   })
 
   test('createShip returns an object', () => {
@@ -23,10 +25,11 @@ describe('createShip creates a few different types of ships', () => {
 
   })
 
-  test('createShip has a proper length property', () => {
+  test('createShip has the proper length property associated with the shipName given', () => {
     expect(cruiser.length).toBe(3)
     expect(destroyer.length).toBe(2)
     expect(carrier.length).toBe(5)
+    expect(unknown.length).toBe(undefined)
   })
 
   test('createShip creates a board state that is an array', () => {
@@ -35,11 +38,10 @@ describe('createShip creates a few different types of ships', () => {
     expect(cruiser.state).toStrictEqual([1,1,1])
   })
 
-  test('createShip returns different ships, represented by shipName, according to length', () => {
+  test('createShip returns different ships based on the shipName entered', () => {
     expect(carrier.shipName).toBe('carrier')
     expect(cruiser.shipName).toBe('cruiser')
     expect(destroyer.shipName).toBe('destroyer')
-
   })
 
   test('createShip has an empty coordinates array on default', () => {
@@ -53,10 +55,11 @@ describe('createShip creates a few different types of ships', () => {
     expect(carrier.hit(1)).toStrictEqual([1,-1,1,1,1])
     expect(carrier.hit(2)).toStrictEqual([1,-1,-1,1,1])
     expect(destroyer.hit(1)).toStrictEqual([1,-1])
+    expect(destroyer.hit(1)).toBe('error')
     expect(destroyer.hit(0)).toStrictEqual([-1,-1])
   })
 
-  test('createShip has a isSunk function', () => {
+  test('createShip has a isSunk function that returns true when ship state is all -1 (hit)', () => {
     expect(cruiser.isSunk()).toBe(false)
     expect(destroyer.isSunk()).toBe(false)
     destroyer.hit(1)
@@ -152,6 +155,7 @@ describe('createGameboard creates a gameboard with functions/containers', () => 
 
   beforeEach(() => {
     gameboard = gameLogic.createGameboard()
+    gameboard2 = gameLogic.createGameboard()
   })
 
   test('createGameboard makes an array filled with 0\'s', () => {
@@ -164,13 +168,21 @@ describe('createGameboard creates a gameboard with functions/containers', () => 
     expect(gameboard.placeShip(10,true,'carrier')).toStrictEqual('error')
     expect(gameboard.placeShip(26,true,'carrier')).toStrictEqual('error')
     expect(gameboard.placeShip(25,true,'carrier')).toStrictEqual(carrierPlacedGameboard)
+
+    expect(gameboard2.placeShip(0,true,'cruiser')).toStrictEqual(cruiserPlacedGameboard)
+    expect(gameboard2.placeShip(11,false,'submarine')).toStrictEqual(verticalPlacedGameboard)
+    expect(gameboard2.placeShip(10,true,'carrier')).toStrictEqual('error')
+    expect(gameboard2.placeShip(26,true,'carrier')).toStrictEqual('error')
+    expect(gameboard2.placeShip(25,true,'carrier')).toStrictEqual(carrierPlacedGameboard)
   })
 
-  test('gameboard changes the ship\'s coordinates after it uses placeShip()', () => {
+  test('gameboard changes the ship\'s coordinates after it uses placeShip(), and resets it if placed twice', () => {
     gameboard.placeShip(0, true, 'cruiser');
     expect(gameboard.shipContainer.cruiser.coordinates).toStrictEqual([0,1,2])
     gameboard.placeShip(4, false, 'battleship')
     expect(gameboard.shipContainer.battleship.coordinates).toStrictEqual([4,14,24,34])
+    gameboard.placeShip(5, true, 'battleship')
+    expect(gameboard.shipContainer.battleship.coordinates).toStrictEqual([5,6,7,8])
   })
 
 
