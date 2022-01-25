@@ -158,7 +158,7 @@ describe('createGameboard creates a gameboard with functions/containers', () => 
     expect(gameboard.gameboard).toEqual(emptyGameboard)
   })
 
-  test('createGameboard.placeShip() will place a boat of certain length in a spot vertically or horizontally', () => {
+  test('placeShip() will place a boat of certain length in a spot vertically or horizontally, but not if it\'s occupied or goes over the edge of the board', () => {
     expect(gameboard.placeShip(0,true,'cruiser')).toStrictEqual(cruiserPlacedGameboard)
     expect(gameboard.placeShip(11,false,'submarine')).toStrictEqual(verticalPlacedGameboard)
     expect(gameboard.placeShip(10,true,'carrier')).toStrictEqual('error')
@@ -167,7 +167,10 @@ describe('createGameboard creates a gameboard with functions/containers', () => 
   })
 
   test('gameboard changes the ship\'s coordinates after it uses placeShip()', () => {
-
+    gameboard.placeShip(0, true, 'cruiser');
+    expect(gameboard.shipContainer.cruiser.coordinates).toStrictEqual([0,1,2])
+    gameboard.placeShip(4, false, 'battleship')
+    expect(gameboard.shipContainer.battleship.coordinates).toStrictEqual([4,14,24,34])
   })
 
 

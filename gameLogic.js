@@ -78,10 +78,12 @@ function createGameboard () {
     if(horizontal) {
       for (let i = coords; i < (coords + shipLength); i++) {
         console.log(coords, i);
+        this.shipContainer[shipName].coordinates.push(i)
         gameboard[i] = 1;
       }
     } else {
       for (let i = coords; i < coords + shipLength * 10; i = i + 10) {
+        this.shipContainer[shipName].coordinates.push(i)
         gameboard[i] = 1;
       }
     }
