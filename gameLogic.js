@@ -116,7 +116,16 @@ function createGameboard () {
   console.log(shipContainer)
 
   function receiveAttack (coords) {
+    // receive an input of 0-99, representing coords on my array
+    // then just -2 i guess to whatever that is on gameboard
+    // if it turns out that gameboard[coords] === 1 (before) or === -1 (after)
+    //    then we need to hunt for which ship is at these coordinates
 
+    // Object.values(this.shipContainer) turns into [{}, {}, {}, {}, {}]
+    // then i can use array.forEach? and then look through the coordinates for a hit
+    // if it hits we must use that ship's function and isSunk function
+
+    // this.shipContainer.keys ??
     // for (let i = 0; i < shipContainer.length; i++) {
     //   let currentShip = shipContainer[i]
     //   if(currentShip.coordinates.includes(coords)) {

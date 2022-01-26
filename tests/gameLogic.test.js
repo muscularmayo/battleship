@@ -240,6 +240,7 @@ describe('createGameboard creates a gameboard with functions/containers', () => 
 
   test('gameboard has a receiveAttack function that changes board state in that position to position-2', () => {
     expect(gameboard.receiveAttack(0)).toStrictEqual(topLeftCornerAttackedGameboard)
+
   })
 
   test('gameboard will not place a ship that will overlap on another ship', () => {
