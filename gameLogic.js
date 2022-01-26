@@ -10,6 +10,8 @@ function createShip (shipName) {
     length = 4;
   } else if (shipName === 'carrier') {
     length = 5;
+  } else {
+    return undefined
   }
 
   const createShipState = function(length) {
@@ -27,8 +29,8 @@ function createShip (shipName) {
   const hit = function (num) {
     //num is now going to be the coordinates of the board, and we will be using something like, this.coordinates.indexOf(num)
     //this.coordinates will be an array of the coordinates we occupy with this specific ship
-    if (this.state[num] === -1) {
-      console.error('error, this spot has already been fired upon');
+    if (this.state[num] === -1 || num > this.state.length - 1 || num < 0) {
+      console.error('doesn\t exist on ship or already been fired upon, or negative #');
       return 'error';
     }
     state[num] -= 2;
@@ -55,7 +57,7 @@ function createGameboard () {
   const gameboard = []
   const shipContainer = {}
 
-  //we're going to turn this into one array because board is always 10x10 no exceptions
+  //we're going to turn this into one array because board is always 10x10 (100 spaces) no exceptions
   for(let i = 0; i < 100; i++) {
     gameboard[i] = 0;
   }
@@ -63,9 +65,17 @@ function createGameboard () {
 
 
   const placeShip = function (coords, horizontal, shipName) {
-    //placeship check
-
     const shipLength = this.shipContainer[shipName].length;
+
+    if (this.shipContainer[shipName].coordinates.length > 0) {
+      for (let i = 0; i < this.shipContainer[shipName].coordinates.length; i++) {
+        this.gameboard[this.shipContainer[shipName].coordinates[i]] = 0;
+      }
+      this.shipContainer[shipName].coordinates = []
+
+    }
+
+    //placeship check
     console.log(this.shipContainer)
     const placeable = checkPlacement(coords, horizontal, shipLength)
     console.log(shipLength, placeable)
@@ -75,9 +85,7 @@ function createGameboard () {
       return 'error';
     }
 
-    if (this.shipContainer[shipName].coordinates.length > 0) {
-      this.shipContainer[shipName].coordinates = []
-    }
+
 
     if (horizontal) {
       for (let i = coords; i < (coords + shipLength); i++) {
@@ -108,13 +116,13 @@ function createGameboard () {
   console.log(shipContainer)
 
   function receiveAttack (coords) {
-    for (let i = 0; i < shipContainer.length; i++) {
-      let currentShip = shipContainer[i]
-      if(currentShip.coordinates.includes(coords)) {
-        currentShip.hit(indexOf(coords));
-        return;
-      }
-    }
+
+    // for (let i = 0; i < shipContainer.length; i++) {
+    //   let currentShip = shipContainer[i]
+    //   if(currentShip.coordinates.includes(coords)) {
+    //     currentShip.hit(indexOf(coords));
+    //   }
+    // }
   }
   function checkPlacement (coords, horizontal, shipLength) {
     if(horizontal) {
