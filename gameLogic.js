@@ -26,15 +26,16 @@ function createShip (shipName) {
 
 
 
-  const hit = function (num) {
-    //num is now going to be the coordinates of the board, and we will be using something like, this.coordinates.indexOf(num)
+  const hit = function (coords) {
     //this.coordinates will be an array of the coordinates we occupy with this specific ship
-    if (this.state[num] === -1 || num > this.state.length - 1 || num < 0) {
+    //convert coords to an index on ship state
+    let num = this.coordinates.indexOf(coords)
+    if (this.state[num] === -1 || num < 0 || num > 99) {
       console.error('doesn\t exist on ship or already been fired upon, or negative #');
-      return 'error';
+      return 'error'
     }
-    state[num] -= 2;
-    return state;
+    this.state[num] -= 2;
+    return this.state;
   } // i need to link hit with coordinates to my board somehow
 
   const isSunk = function() {
@@ -118,6 +119,15 @@ function createGameboard () {
   function receiveAttack (coords) {
     // receive an input of 0-99, representing coords on my array
     // then just -2 i guess to whatever that is on gameboard
+    this.gameboard[coords] -= 2;
+
+    if(this.gameboard[coords] === -1) {
+      Object.values(this.shipContainer).forEach(element => {
+        if (element.coordinates.includes(coords)) {
+          element.hit(coords)
+        }
+      })
+    }
     // if it turns out that gameboard[coords] === 1 (before) or === -1 (after)
     //    then we need to hunt for which ship is at these coordinates
 

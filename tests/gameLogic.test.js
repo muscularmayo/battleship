@@ -70,40 +70,52 @@ describe('createShip creates a few different types of ships', () => {
   })
 
   test('createShip has a hit function that changes ship state', () => {
-    expect(cruiser.hit(0)).toStrictEqual([-1,1,1]);
-    expect(carrier.hit(1)).toStrictEqual([1,-1,1,1,1]);
-    expect(carrier.hit(2)).toStrictEqual([1,-1,-1,1,1]);
+    cruiser.coordinates = [82, 83, 84]
+    carrier.coordinates = [10, 20, 30, 40, 50]
+    destroyer.coordinates = [11, 12]
+    submarine.coordinates = [23, 33, 43]
+    battleship.coordinates = [71, 72, 73, 74]
+    expect(cruiser.hit(82)).toStrictEqual([-1,1,1]);
 
-    expect(destroyer.hit(1)).toStrictEqual([1,-1]);
-    expect(destroyer.hit(1)).toBe('error');
-    expect(destroyer.hit(0)).toStrictEqual([-1,-1]);
+    expect(carrier.hit(20)).toStrictEqual([1,-1,1,1,1]);
+    expect(carrier.hit(30)).toStrictEqual([1,-1,-1,1,1]);
 
-    expect(battleship.hit(4)).toBe('error');
-    expect(battleship.hit(3)).toStrictEqual([1,1,1,-1]);
-    expect(battleship.hit(2)).toStrictEqual([1,1,-1,-1]);
-    expect(battleship.hit(1)).toStrictEqual([1,-1,-1,-1]);
-    expect(battleship.hit(1)).toStrictEqual('error');
+    expect(destroyer.hit(12)).toStrictEqual([1,-1]);
+    expect(destroyer.hit(12)).toBe('error');
+    expect(destroyer.hit(11)).toStrictEqual([-1,-1]);
+
+    expect(battleship.hit()).toBe('error');
+    expect(battleship.hit(74)).toStrictEqual([1,1,1,-1]);
+    expect(battleship.hit(73)).toStrictEqual([1,1,-1,-1]);
+    expect(battleship.hit(72)).toStrictEqual([1,-1,-1,-1]);
+    expect(battleship.hit(72)).toStrictEqual('error');
     expect(battleship.hit(-1)).toBe('error');
 
-    expect(submarine.hit(0)).toStrictEqual([-1,1,1]);
-    expect(submarine.hit(1)).toStrictEqual([-1,-1,1]);
-    expect(submarine.hit(2)).toStrictEqual([-1,-1,-1]);
+    expect(submarine.hit(23)).toStrictEqual([-1,1,1]);
+    expect(submarine.hit(33)).toStrictEqual([-1,-1,1]);
+    expect(submarine.hit(43)).toStrictEqual([-1,-1,-1]);
 
   })
 
   test('createShip has a isSunk function that returns true when ship state is all -1 (hit)', () => {
+    cruiser.coordinates = [82, 83, 84]
+    carrier.coordinates = [10, 20, 30, 40, 50]
+    destroyer.coordinates = [11, 12]
+    submarine.coordinates = [23, 33, 43]
+    battleship.coordinates = [71, 72, 73, 74]
+
     expect(destroyer.isSunk()).toBe(false)
-    destroyer.hit(1)
+    destroyer.hit(12)
     expect(destroyer.isSunk()).toBe(false)
-    destroyer.hit(0)
+    destroyer.hit(11)
     expect(destroyer.isSunk()).toBe(true)
 
     expect(cruiser.isSunk()).toBe(false)
-    cruiser.hit(0)
+    cruiser.hit(82)
     expect(cruiser.isSunk()).toBe(false)
-    cruiser.hit(1)
+    cruiser.hit(83)
     expect(cruiser.isSunk()).toBe(false)
-    cruiser.hit(2)
+    cruiser.hit(84)
     expect(cruiser.isSunk()).toBe(true)
   })
 
