@@ -202,6 +202,19 @@ describe('createGameboard creates a gameboard with functions/containers', () => 
     0,0,0,0,0,0,0,0,0,0
   ]
 
+  let receiveAttack1Gameboard = [
+    -2,-1,1,1,0,0,0,0,0,0,
+    0,0,0,0,0,0,0,0,0,0,
+    0,0,0,0,0,0,0,0,0,0,
+    0,0,0,0,0,0,0,0,0,0,
+    0,0,0,0,0,0,0,0,0,0,
+    0,0,0,0,0,0,0,0,0,0,
+    0,0,0,0,0,0,0,0,0,0,
+    0,0,0,0,0,0,0,0,0,0,
+    0,0,0,0,0,0,0,0,0,0,
+    0,0,0,0,0,0,0,0,0,0
+  ]
+
   let gameboard;
 
   beforeEach(() => {
@@ -252,6 +265,11 @@ describe('createGameboard creates a gameboard with functions/containers', () => 
 
   test('gameboard has a receiveAttack function that changes board state in that position to position-2', () => {
     expect(gameboard.receiveAttack(0)).toStrictEqual(topLeftCornerAttackedGameboard)
+
+    gameboard.placeShip(1, true, 'cruiser')
+    gameboard.receiveAttack(1)
+    expect(gameboard.gameboard).toStrictEqual(receiveAttack1Gameboard)
+    expect(gameboard.shipContainer.cruiser.state).toStrictEqual([-1, 1, 1])
 
   })
 

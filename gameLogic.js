@@ -128,6 +128,8 @@ function createGameboard () {
         }
       })
     }
+
+    return this.gameboard
     // if it turns out that gameboard[coords] === 1 (before) or === -1 (after)
     //    then we need to hunt for which ship is at these coordinates
 
