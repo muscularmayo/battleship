@@ -118,16 +118,20 @@ function createGameboard () {
 
   function receiveAttack (coords) {
     // receive an input of 0-99, representing coords on my array
-    // then just -2 i guess to whatever that is on gameboard
-    this.gameboard[coords] -= 2;
 
-    if(this.gameboard[coords] === -1) {
+    if(this.gameboard[coords] === 1) {
       Object.values(this.shipContainer).forEach(element => {
         if (element.coordinates.includes(coords)) {
           element.hit(coords)
+          if(element.isSunk()) {
+            return `${element} has sunk!`
+          }
         }
       })
     }
+    // then just -2 i guess to whatever that is on gameboard
+    this.gameboard[coords] -= 2;
+
 
     return this.gameboard
     // if it turns out that gameboard[coords] === 1 (before) or === -1 (after)
@@ -175,12 +179,20 @@ function createGameboard () {
       //check if every spot is currently at 0, if it's not 0 then bad
     }
   }
+  function allSunk() {
+    let sunkFlag = false;
+    sunkFlag = Object.values(this.shipContainer).every((e) => {
+      return e.isSunk();
+    })
+    return sunkFlag;
+  }
 
-  return { gameboard , placeShip, shipContainer, receiveAttack};
+  return { gameboard , placeShip, shipContainer, receiveAttack, allSunk};
 }
 
 function createPlayer () {
 
+  return {}
 }
 
 /*
