@@ -179,6 +179,7 @@ function createGameboard () {
       //check if every spot is currently at 0, if it's not 0 then bad
     }
   }
+
   function allSunk() {
     let sunkFlag = false;
     sunkFlag = Object.values(this.shipContainer).every((e) => {
@@ -190,17 +191,27 @@ function createGameboard () {
   return { gameboard , placeShip, shipContainer, receiveAttack, allSunk};
 }
 
-function createPlayer () {
+function createPlayer (human) {
+  if(human) {
+
+  } else if (!human) {
+
+  }
 
   return {}
 }
 
-/*
+
 function createGameState () {
+  let human = {}
+  human.gameboard = createGameboard()
+  human.player = createPlayer(true)
+  let cpu = {}
+  cpu.gameboard = createGameboard()
+  cpu.player = createPlayer(false)
+}
 
-}*/
-
-module.exports = { createShip, createGameboard, createPlayer }
+module.exports = { createShip, createGameboard, createPlayer, createState }
 
 /* ship output will look like
 
