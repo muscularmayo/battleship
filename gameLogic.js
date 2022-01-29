@@ -191,16 +191,6 @@ function createGameboard () {
   return { gameboard , placeShip, shipContainer, receiveAttack, allSunk};
 }
 
-function createPlayer (human) {
-  if(human) {
-
-  } else if (!human) {
-
-  }
-
-  return {}
-}
-
 
 function createGameState () {
   let human = {}
