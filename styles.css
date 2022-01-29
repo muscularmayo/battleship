@@ -3,8 +3,28 @@
   justify-content: space-between;
 }
 
-.grid {
+.grid-human {
+  width: 45%;
   height: 400px;
-  width: 400px;
-  color: lightgreen;
+  display: flex;
+  flex: wrap;
+  background-color: lightgreen;
+}
+
+.grid-computer {
+  width: 45%;
+  height: 400px;
+  display:flex;
+  flex: wrap;
+  flex-direction: row;
+  background-color: rebeccapurple;
+}
+
+.grid div{
+  display: flex;
+  flex-direction: row;
+  width: auto;
+  height: auto;
+  background-color: red;
+  border: white;
 }
