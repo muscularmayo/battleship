@@ -14,14 +14,14 @@ body {
   flex-wrap: wrap;
   justify-content: center;
   padding: 0px;
-  margin: 10px;
-  grid-gap: 10px;
+  margin: 0px;
+  grid-gap: 30px;
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(10, 30px) ;
-  grid-template-rows: repeat(10, 30px);
+  grid-template-columns: repeat(10, 45px) ;
+  grid-template-rows: repeat(10, 45px);
 
 
 }
@@ -41,9 +41,49 @@ body {
 
 }
 
-@media only screen and (min-width: 880px) {
+@media only screen and (max-width: 320px) {
   body {
-    background-color:yellow;
+    background-color: pink;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(10, 25px);
+    grid-template-rows: repeat(10, 25px);
+  }
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0px;
+    margin: 10px;
+    grid-gap: 25px;
+  }
+}
+
+@media only screen and (min-width: 321px) and (max-width: 480px) {
+  body {
+    background-color:red;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(10, 30px);
+    grid-template-rows: repeat(10, 30px);
+  }
+
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0px;
+    margin: 10px;
+    grid-gap: 25px;
+  }
+}
+
+@media only screen and (min-width:481px) and (max-width: 768px) {
+  body {
+    background-color:orange;
   }
 
   .grid {
@@ -58,6 +98,28 @@ body {
     justify-content: center;
     padding: 0px;
     margin: 10px;
+    grid-gap: 25px;
+  }
+}
+
+
+@media only screen and (min-width: 1066px) {
+  body {
+    background-color:yellow;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(10, 45px);
+    grid-template-rows: repeat(10, 45px);
+  }
+
+  .container {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    padding: 0px;
+    margin: 50px;
     grid-gap: 100px;
   }
 }
