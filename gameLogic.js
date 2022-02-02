@@ -201,7 +201,7 @@ function createGameState () {
   cpu.player = createPlayer(false)
 }
 
-module.exports = { createShip, createGameboard, createPlayer, createState }
+module.exports = { createShip, createGameboard, createGameState }
 
 /* ship output will look like
 
