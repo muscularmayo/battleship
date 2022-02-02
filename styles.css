@@ -1,23 +1,24 @@
-* {
+/* * {
   box-sizing: border-box;
-}
+} */
 
-@media only screen and (max-width: 905px) {
-  /* For phone: */
+@media only screen and (min-width: 905px) {
   body {
-    background-color: yellow
+    background-color: yellow;
   }
 
   .container {
-    min-height: 100vh;
-    align-self: center;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    grid-gap: 15px;
   }
 
   .grid {
     display: grid;
-    justify-content: center;
-    grid-template-columns: repeat (10, 30px);
-    grid-template-rows: repeat (10, 30px);
+    grid-template-columns: repeat(10, 40px);
+    grid-template-rows: repeat(10, 40px);
+
   }
 }
 
@@ -26,39 +27,32 @@ body {
   font-family: Avenir, sans-serif;
   margin: 2rem auto;
   width: 95%;
+  background-color:lightgreen;
 }
 
 .container {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   padding: 0px;
-  margin: 0px;
+  margin: 10px;
+  grid-gap: 15px;
 }
 
 .grid {
   display: grid;
-  grid-template-columns: 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px ;
-  grid-template-rows: 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px ;
-  padding: 5px;
-  margin: 10px;
-}
-/*
-.grid-human {
-  width: 45%;
-  height: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  background-color: lightgreen;
+  grid-template-columns: repeat(10, 30px) ;
+  grid-template-rows: repeat(10, 30px);
+
+
 }
 
-.grid-computer {
-  width: 45%;
-  height: 100%;
+.hidden-info {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  background-color: rebeccapurple;
+  justify-content: center;
+  grid-gap: 5px;
 }
-*/
+
 
 .grid div{
 
