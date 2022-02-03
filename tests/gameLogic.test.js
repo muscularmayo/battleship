@@ -277,7 +277,12 @@ describe('createGameboard creates a gameboard with functions/containers', () => 
     gameboard.placeShip(0,true,'cruiser')
     expect(gameboard.placeShip(0,true,'destroyer')).toBe('error')
     expect(gameboard.placeShip(0,false,'submarine')).toBe('error')
-    expect(gameboard.placeShip(0,true,'cruiser')).toStrictEqual(cruiserPlacedGameboard)
+    expect(gameboard.placeShip(1,false,'submarine')).toBe('error')
+    expect(gameboard.placeShip(1,true,'submarine')).toBe('error')
+    expect(gameboard.placeShip(2,false,'destroyer')).toBe('error')
+    expect(gameboard.placeShip(2,true,'carrier')).toBe('error')
+
+    expect(gameboard.gameboard).toStrictEqual(cruiserPlacedGameboard)
   })
 
   test('gameboard can check if all the ships have sunk', () => {

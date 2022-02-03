@@ -67,7 +67,7 @@ function createGameboard () {
 
   const placeShip = function (coords, horizontal, shipName) {
     const shipLength = this.shipContainer[shipName].length;
-
+    //horiz true = horizontal placement
     if (this.shipContainer[shipName].coordinates.length > 0) {
       for (let i = 0; i < this.shipContainer[shipName].coordinates.length; i++) {
         this.gameboard[this.shipContainer[shipName].coordinates[i]] = 0;
@@ -115,6 +115,10 @@ function createGameboard () {
   }
   fillShipContainer();
   console.log(shipContainer)
+
+  const randomlyPlace = function () {
+    //we want to fill our gameboard with all 5 ships, we must check coordinates randomly
+  }
 
   function receiveAttack (coords) {
     // receive an input of 0-99, representing coords on my array
