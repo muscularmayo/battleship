@@ -308,7 +308,7 @@ describe('createGameboard creates a gameboard with functions/containers', () => 
 
 })
 
-describe('player is an object that tells us whether it\'s player1 or player2\'s turn', () => {
+xdescribe('player is an object that tells us whether it\'s player1 or player2\'s turn', () => {
   test('player is an object', () => {
     expect(typeof player).toBe('object')
   })
