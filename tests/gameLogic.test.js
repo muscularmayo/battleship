@@ -239,6 +239,7 @@ describe('createGameboard creates a gameboard with functions/containers', () => 
     expect(gameboard2.placeShip(10,true,'carrier')).toStrictEqual('error')
     expect(gameboard2.placeShip(26,true,'carrier')).toStrictEqual('error')
     expect(gameboard2.placeShip(25,true,'carrier')).toStrictEqual(carrierPlacedGameboard)
+    //console.log('gameboard: ', gameboard)
   })
 
   test('gameboard changes the ship\'s coordinates after it uses placeShip(), and resets it if placed twice', () => {
@@ -303,6 +304,12 @@ describe('createGameboard creates a gameboard with functions/containers', () => 
     expect(gameboard.allSunk()).toBe(true)
 
     expect(gameboard2.allSunk()).toBe(false)
+  })
+
+  test('gameboard is capable of randomly placing all my ships', () => {
+    expect(gameboard.gameboard).toStrictEqual(emptyGameboard);
+    gameboard.randomlyPlace();
+    console.log(gameboard)
   })
 
 

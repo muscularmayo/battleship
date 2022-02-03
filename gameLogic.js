@@ -69,6 +69,7 @@ function createGameboard () {
     const shipLength = this.shipContainer[shipName].length;
     //horiz true = horizontal placement
     if (this.shipContainer[shipName].coordinates.length > 0) {
+      //in case we're re-placing the ship on the board, reset coords/board state
       for (let i = 0; i < this.shipContainer[shipName].coordinates.length; i++) {
         this.gameboard[this.shipContainer[shipName].coordinates[i]] = 0;
       }
@@ -77,9 +78,9 @@ function createGameboard () {
     }
 
     //placeship check
-    console.log(this.shipContainer)
+    //console.log(this.shipContainer)
     const placeable = checkPlacement(coords, horizontal, shipLength)
-    console.log(shipLength, placeable)
+    //console.log(shipLength, placeable)
 
     if (!placeable) {
       console.error('this ship cannot be placed')
@@ -90,7 +91,7 @@ function createGameboard () {
 
     if (horizontal) {
       for (let i = coords; i < (coords + shipLength); i++) {
-        console.log(coords, i);
+        //console.log(coords, i);
         this.shipContainer[shipName].coordinates.push(i)
         gameboard[i] = 1;
       }
@@ -114,14 +115,23 @@ function createGameboard () {
 
   }
   fillShipContainer();
-  console.log(shipContainer)
+  //console.log(Object.values(shipContainer))
 
-  const randomlyPlace = function () {
+  function randomlyPlace () {
     //we want to fill our gameboard with all 5 ships, we must check coordinates randomly
     Object.values(this.shipContainer).forEach((e) => {
-      let randomCoord = Math.floor(Math.random()*100)
-      let
+      let randomCoord = Math.floor(Math.random() * 100)
+      let horizontalBoolean = Math.floor(Math.random() * 2)
+      recursivelyPlace(randomCoord, horizontalBoolean, e.shipName)
     })
+  }
+
+  function recursivelyPlace (coord, horiz, shipName) {
+    let x = placeShip(coord, horiz, shipName)
+    if (x === 'error') {
+      return recursivelyPlace(coord, horiz, shipName)
+    }
+    return;
   }
 
   function receiveAttack (coords) {
@@ -159,7 +169,7 @@ function createGameboard () {
   }
   function checkPlacement (coords, horizontal, shipLength) {
     if(horizontal) {
-      console.log(gameboard, coords)
+      //console.log(gameboard, coords)
       //we check if our column number (coord%10) <= (10 - shipLength)
       if (coords % 10 <= 10 - shipLength) {
         //then we need to check if every spot is currently a 0
@@ -196,7 +206,7 @@ function createGameboard () {
     return sunkFlag;
   }
 
-  return { gameboard , placeShip, shipContainer, receiveAttack, allSunk};
+  return { gameboard , placeShip, shipContainer, receiveAttack, allSunk, randomlyPlace};
 }
 
 
