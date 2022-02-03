@@ -118,6 +118,10 @@ function createGameboard () {
 
   const randomlyPlace = function () {
     //we want to fill our gameboard with all 5 ships, we must check coordinates randomly
+    Object.values(this.shipContainer).forEach((e) => {
+      let randomCoord = Math.floor(Math.random()*100)
+      let
+    })
   }
 
   function receiveAttack (coords) {
