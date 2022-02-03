@@ -66,14 +66,14 @@ function createGameboard () {
 
 
   const placeShip = function (coords, horizontal, shipName) {
-    const shipLength = this.shipContainer[shipName].length;
+    const shipLength = shipContainer[shipName].length;
     //horiz true = horizontal placement
-    if (this.shipContainer[shipName].coordinates.length > 0) {
+    if (shipContainer[shipName].coordinates.length > 0) {
       //in case we're re-placing the ship on the board, reset coords/board state
       for (let i = 0; i < this.shipContainer[shipName].coordinates.length; i++) {
-        this.gameboard[this.shipContainer[shipName].coordinates[i]] = 0;
+        gameboard[shipContainer[shipName].coordinates[i]] = 0;
       }
-      this.shipContainer[shipName].coordinates = []
+      shipContainer[shipName].coordinates = []
 
     }
 
@@ -92,17 +92,17 @@ function createGameboard () {
     if (horizontal) {
       for (let i = coords; i < (coords + shipLength); i++) {
         //console.log(coords, i);
-        this.shipContainer[shipName].coordinates.push(i)
+        shipContainer[shipName].coordinates.push(i)
         gameboard[i] = 1;
       }
     } else {
       for (let i = coords; i < coords + shipLength * 10; i = i + 10) {
-        this.shipContainer[shipName].coordinates.push(i)
+        shipContainer[shipName].coordinates.push(i)
         gameboard[i] = 1;
       }
     }
 
-    return this.gameboard;
+    return gameboard;
     //this.gameboard[yx]
   }
 
@@ -120,16 +120,17 @@ function createGameboard () {
   function randomlyPlace () {
     //we want to fill our gameboard with all 5 ships, we must check coordinates randomly
     Object.values(this.shipContainer).forEach((e) => {
-      let randomCoord = Math.floor(Math.random() * 100)
-      let horizontalBoolean = Math.floor(Math.random() * 2)
-      recursivelyPlace(randomCoord, horizontalBoolean, e.shipName)
+
+      recursivelyPlace(e.shipName)
     })
   }
 
-  function recursivelyPlace (coord, horiz, shipName) {
-    let x = placeShip(coord, horiz, shipName)
+  function recursivelyPlace (shipName) {
+    let randomCoord = Math.floor(Math.random() * 100)
+    let horizontalBoolean = Math.floor(Math.random() * 2)
+    let x = placeShip(randomCoord, horizontalBoolean, shipName)
     if (x === 'error') {
-      return recursivelyPlace(coord, horiz, shipName)
+      return recursivelyPlace(randomCoord, horizontalBoolean, shipName)
     }
     return;
   }
