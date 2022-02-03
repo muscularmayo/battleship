@@ -130,7 +130,7 @@ function createGameboard () {
     let horizontalBoolean = Math.floor(Math.random() * 2)
     let x = placeShip(randomCoord, horizontalBoolean, shipName)
     if (x === 'error') {
-      return recursivelyPlace(randomCoord, horizontalBoolean, shipName)
+      return recursivelyPlace(shipName)
     }
     return;
   }
