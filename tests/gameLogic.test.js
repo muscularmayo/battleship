@@ -310,6 +310,10 @@ describe('createGameboard creates a gameboard with functions/containers', () => 
     expect(gameboard.gameboard).toStrictEqual(emptyGameboard);
     gameboard.randomlyPlace();
     console.log(gameboard)
+    let x = gameboard.gameboard.reduce((prev, curr) => {
+      return prev + curr
+    })
+    expect(x).toBe(17)
   })
 
 
