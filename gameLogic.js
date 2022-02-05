@@ -139,7 +139,7 @@ function createGameboard () {
     // receive an input of 0-99, representing coords on my array
 
     if(gameboard[coords] === 1) {
-      Object.values(shipContainer).forEach(element => {
+      Object.values(this.shipContainer).forEach(element => {
         if (element.coordinates.includes(coords)) {
           element.hit(coords)
           if(element.isSunk()) {

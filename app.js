@@ -26,7 +26,7 @@ function createBothGrids () {
 }
 
 function clickComputerBoard (e) {
-  const id = this.id.slice(4)
+  const id = Number(this.id.slice(4))
   if(cpu.gameboard[id] === -1 || cpu.gameboard[id] === -2) {
     console.log('this has been fired upon already')
     return
@@ -38,6 +38,7 @@ function clickComputerBoard (e) {
     console.log(cpu.shipContainer)
     if (cpu.allSunk()) {
       alert('you win!')
+      //this will be converted to changing the h1 info area
     }
   } else {
     this.classList.add('not-ship')
