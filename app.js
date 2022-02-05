@@ -27,9 +27,17 @@ function createBothGrids () {
 
 function clickComputerBoard (e) {
   const id = this.id.slice(4)
+  if(cpu.gameboard[id] === -1 || cpu.gameboard[id] === -2) {
+    console.log('this has been fired upon already')
+    return
+  }
   console.log(this, cpu.gameboard[id])
   if (cpu.gameboard[id] === 1) {
     this.classList.add('ship')
+    cpu.receiveAttack(id)
+    if (cpu.allSunk()) {
+      alert('you win!')
+    }
   } else {
     this.classList.add('not-ship')
   }
