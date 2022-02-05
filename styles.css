@@ -9,6 +9,10 @@ body {
   background-color:lightgreen;
 }
 
+.grid .ship {
+  background-color:violet
+}
+
 .container {
   display: flex;
   flex-wrap: wrap;

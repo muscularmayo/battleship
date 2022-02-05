@@ -83,7 +83,7 @@ function createGameboard () {
     //console.log(shipLength, placeable)
 
     if (!placeable) {
-      console.error('this ship cannot be placed')
+      console.error(`${shipName} cannot be placed at ${coords}. horizontal: ${!!horizontal} vertical: ${!horizontal}`)
       return 'error';
     }
 
