@@ -1,10 +1,10 @@
-import gameLogic from '../gameLogic'
+import {createShip, createGameboard, createGameState} from '../gameLogic.js'
 //we need to test createShip, createGameboard, createPlayer, and finally gameState which is a collection of all 3
 //ship object has length, name, state, hit(), isSunk()
 //gameboard object has state, placeShip, receiveAttack
 //player object is literally just player1 or player2??
 //overall gamestate should include all of these, it should have 2 gameboards, 2 collections of 5 boats, player1 vs 2 turn
-
+let gameLogic = {createShip, createGameboard, createGameState}
 describe('createShip creates a few different types of ships', () => {
   let carrier;
   let cruiser;
@@ -214,8 +214,8 @@ describe('createGameboard creates a gameboard with functions/containers', () => 
     0,0,0,0,0,0,0,0,0,0,
     0,0,0,0,0,0,0,0,0,0
   ]
-
   let gameboard;
+  let gameboard2;
 
   beforeEach(() => {
     gameboard = gameLogic.createGameboard()

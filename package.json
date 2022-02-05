@@ -8,8 +8,8 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "jest",
-    "watch-test": "jest --watchAll"
+    "test": "node --experimental-vm-modules node_modules/.bin/jest",
+    "watch-test": "node --experimental-vm-modules node_modules/.bin/jest --watchAll"
   },
   "repository": {
     "type": "git",

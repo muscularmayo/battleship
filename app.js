@@ -1,11 +1,11 @@
-import { createShip, createGameboard, createGameState } from './gameLogic.js'
+import {createShip, createGameboard } from './gameLogic.js'
 
 // on website load, what do we want this thing to do! we want.... to create our boards (both front/back end) and
 //link them up to each other :)
 
 function startGame () {
-  const cpu = createGameboard()
-  const human = createGameboard()
+  const cpu = gameLogic.createGameboard()
+  const human = gameLogic.createGameboard()
   let humanTurn = true;
 }
 
