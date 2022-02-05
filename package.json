@@ -2,6 +2,7 @@
   "name": "battleship",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "main": "app.js",
   "directories": {
     "test": "tests"
@@ -23,5 +24,8 @@
   "homepage": "https://github.com/muscularmayo/battleship.git",
   "devDependencies": {
     "jest": "^27.4.7"
+  },
+  "dependencies": {
+    "requirejs": "^2.3.6"
   }
 }

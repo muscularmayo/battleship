@@ -1,4 +1,4 @@
-const gameLogic = require('../gameLogic')
+import gameLogic from '../gameLogic'
 //we need to test createShip, createGameboard, createPlayer, and finally gameState which is a collection of all 3
 //ship object has length, name, state, hit(), isSunk()
 //gameboard object has state, placeShip, receiveAttack
@@ -306,7 +306,7 @@ describe('createGameboard creates a gameboard with functions/containers', () => 
     expect(gameboard2.allSunk()).toBe(false)
   })
 
-  test('gameboard is capable of randomly placing all my ships', () => {
+  test('gameboard is capable of randomly placing all my ships with no duplicates', () => {
     expect(gameboard.gameboard).toStrictEqual(emptyGameboard);
     gameboard.randomlyPlace();
     console.log(gameboard)
@@ -314,6 +314,13 @@ describe('createGameboard creates a gameboard with functions/containers', () => 
       return prev + curr
     })
     expect(x).toBe(17)
+    let coordinateSet = []
+    Object.values(gameboard.shipContainer).forEach((e) => {
+        coordinateSet.push(e.coordinates);
+    })
+    let findDuplicates = arr => arr.filter((item, index) => arr.indexOf(item) != index)
+    expect(findDuplicates(coordinateSet)).toStrictEqual([])
+
   })
 
 

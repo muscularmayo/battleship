@@ -220,7 +220,7 @@ function createGameState () {
   cpu.player = createPlayer(false)
 }
 
-module.exports = { createShip, createGameboard, createGameState }
+export { createShip, createGameboard, createGameState }
 
 /* ship output will look like
 
