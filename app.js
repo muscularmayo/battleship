@@ -35,11 +35,13 @@ function clickComputerBoard (e) {
   if (cpu.gameboard[id] === 1) {
     this.classList.add('ship')
     cpu.receiveAttack(id)
+    console.log(cpu.shipContainer)
     if (cpu.allSunk()) {
       alert('you win!')
     }
   } else {
     this.classList.add('not-ship')
+    cpu.receiveAttack(id)
   }
 }
 
