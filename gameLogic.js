@@ -42,7 +42,6 @@ function createShip (shipName) {
     if (this.state.includes(1)) {
       return false
     } else {
-      console.log(`${this.shipName} has sunk!`)
       return true;
     }
   }
@@ -143,6 +142,7 @@ function createGameboard () {
         if (element.coordinates.includes(coords)) {
           element.hit(coords)
           if(element.isSunk()) {
+            console.log(`${element.shipName} has sunk!`)
             return `${element} has sunk!`
           }
         }

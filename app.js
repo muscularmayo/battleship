@@ -46,5 +46,11 @@ function clickComputerBoard (e) {
   }
 }
 
+function editInfoContainer (shipName) {
+  if(shipName) {
+
+  }
+}
+
 startGame();
 createBothGrids();
