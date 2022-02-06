@@ -9,6 +9,11 @@ body {
   background-color:lightgreen;
 }
 
+#info, #whose-turn {
+  margin: 2px;
+
+}
+
 .grid .ship {
   background-color:rgb(228, 19, 19)
 }

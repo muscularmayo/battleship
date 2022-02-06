@@ -3,6 +3,7 @@ import {createShip, createGameboard } from './gameLogic.js'
 // on website load, what do we want this thing to do! we want.... to create our boards (both front/back end) and
 //link them up to each other :)
 const cpu = createGameboard()
+
 function startGame () {
   const human = createGameboard()
   cpu.randomlyPlace();
@@ -18,14 +19,21 @@ function createBothGrids () {
     let cpuCell = document.createElement('div');
     humanCell.id = `human-${i}`
     cpuCell.id = `cpu-${i}`
-    cpuCell.addEventListener('click', clickComputerBoard)
     human.appendChild(humanCell)
     cpuGrid.appendChild(cpuCell)
 
   }
 }
 
-function clickComputerBoard (e) {
+function initiateComputerBoard () {
+  const cpuGrid = document.querySelector('.grid-computer')
+  const gridCells = cpuGrid.childNodes;
+  gridCells.forEach((e) => {
+    e.addEventListener('click', clickComputerBoard)
+  })
+}
+
+function clickComputerBoard () {
   const id = Number(this.id.slice(4))
   if(cpu.gameboard[id] === -1 || cpu.gameboard[id] === -2) {
     console.log('this has been fired upon already')
@@ -37,8 +45,8 @@ function clickComputerBoard (e) {
     cpu.receiveAttack(id)
     console.log(cpu.shipContainer)
     if (cpu.allSunk()) {
-      alert('you win!')
-      //this will be converted to changing the h1 info area
+      editInfoContainer('You have won!')
+        //this will be converted to changing the h1 info area
     }
   } else {
     this.classList.add('not-ship')
@@ -46,11 +54,11 @@ function clickComputerBoard (e) {
   }
 }
 
-function editInfoContainer (shipName) {
-  if(shipName) {
-
-  }
+function editInfoContainer (words) {
+  const infoDiv = document.querySelector('#info')
+  infoDiv.innerText = words
 }
 
 startGame();
 createBothGrids();
+initateComputerBoard();
