@@ -12,7 +12,7 @@ function startGame () {
 
 function createBothGrids () {
   const human = document.querySelector('.grid-human')
-  const cpu = document.querySelector('.grid-computer')
+  const cpuGrid = document.querySelector('.grid-computer')
   for (let i = 0; i < 100; i++) {
     let humanCell = document.createElement('div');
     let cpuCell = document.createElement('div');
@@ -20,7 +20,7 @@ function createBothGrids () {
     cpuCell.id = `cpu-${i}`
     cpuCell.addEventListener('click', clickComputerBoard)
     human.appendChild(humanCell)
-    cpu.appendChild(cpuCell)
+    cpuGrid.appendChild(cpuCell)
 
   }
 }
