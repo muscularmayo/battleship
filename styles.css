@@ -64,17 +64,17 @@ body {
 
 .ship-container {
   display: grid;
-  grid-template-columns: repeat(10, 10px);
-  grid-template-rows: repeat(10, 10px);
-  background-color: #d9d9d9;
+  grid-template-columns: repeat(10, 45px);
+  grid-template-rows: repeat(10, 45px);
+
 }
 
 
 #carrier{
   grid-column-start: 1;
-  grid-column-end: 5;
-  grid-row-start: 0;
-  grid-row-end: 0;
+  grid-column-end: 6;
+  grid-row-start: 1;
+  grid-row-end: 1;
   background-color: purple;
 
 }
