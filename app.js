@@ -92,7 +92,7 @@ function clickHumanBoard () {
   const coords = Number(this.id.slice(6))
   const shipNames = ['carrier', 'battleship', 'cruiser', 'submarine', 'destroyer']
   shipNames.forEach((element) => {
-    if(human.gameboard[coords] != 1) {
+    if(human.placeShip(coords, horizontalBoolean, element) !== 'error') {
       human.placeShip(coords, horizontalBoolean, element)
       human.shipContainer[element].coordinates.forEach((e) => {
         let id = `#human-${e}`
@@ -103,11 +103,7 @@ function clickHumanBoard () {
       return;
     }
   })
-  if(human.gameboard[coords] === 1) {
-    return;
-  } else {
-    human.placeShip
-  }
+
 }
 
 function placeHumanShip (coords, horizontalBoolean, shipName) {
