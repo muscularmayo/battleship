@@ -9,11 +9,13 @@ function startGame () {
   cpu.randomlyPlace();
   let humanTurn = true;
   console.log(cpu)
+  initiateComputerBoard();
 }
 
 function createBothGrids () {
   const human = document.querySelector('.grid-human')
   const cpuGrid = document.querySelector('.grid-computer')
+  cpuGrid.classList.add('invisible')
   for (let i = 0; i < 100; i++) {
     let humanCell = document.createElement('div');
     let cpuCell = document.createElement('div');
@@ -28,10 +30,11 @@ function createBothGrids () {
 function initiateComputerBoard () {
   const cpuGrid = document.querySelector('.grid-computer')
   const gridCells = cpuGrid.childNodes;
+
   gridCells.forEach((e) => {
     e.addEventListener('click', clickComputerBoard)
   })
-}
+};
 
 function clickComputerBoard () {
   const id = Number(this.id.slice(4))
@@ -59,6 +62,7 @@ function editInfoContainer (words) {
   infoDiv.innerText = words
 }
 
-startGame();
 createBothGrids();
-initateComputerBoard();
+
+const startBtn = document.querySelector('#start-button')
+startBtn.addEventListener('click', startGame)
