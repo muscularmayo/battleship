@@ -29,6 +29,7 @@ function createBothGrids () {
     humanCell.id = `human-${i}`
     cpuCell.id = `cpu-${i}`
     //humanCell add Event Listener - on hover, show the
+    humanCell.addEventListener('click', clickHumanBoard)
     humanGrid.appendChild(humanCell)
     cpuGrid.appendChild(cpuCell)
 
@@ -50,15 +51,15 @@ function initiateComputerBoard () {
 };
 
 function clickComputerBoard () {
-  const id = Number(this.id.slice(4))
-  if(cpu.gameboard[id] === -1 || cpu.gameboard[id] === -2) {
+  const coords = Number(this.id.slice(4))
+  if(cpu.gameboard[coords] === -1 || cpu.gameboard[coords] === -2) {
     console.log('this has been fired upon already')
     return
   }
-  console.log(this, cpu.gameboard[id])
-  if (cpu.gameboard[id] === 1) {
+  console.log(this, cpu.gameboard[coords])
+  if (cpu.gameboard[coords] === 1) {
     this.classList.add('ship')
-    cpu.receiveAttack(id)
+    cpu.receiveAttack(coords)
     console.log(cpu.shipContainer)
     if (cpu.allSunk()) {
       editInfoContainer('You have won!')
@@ -66,13 +67,55 @@ function clickComputerBoard () {
     }
   } else {
     this.classList.add('not-ship')
-    cpu.receiveAttack(id)
+    cpu.receiveAttack(coords)
   }
 }
 
 function editInfoContainer (words) {
   const infoDiv = document.querySelector('#info')
   infoDiv.innerText = words
+}
+
+function hoverHumanBoard () {
+  //place ship at this div's spot??
+  //mouseover and mouseout
+  const shipNames = ['carrier', 'battleship', 'cruiser', 'submarine', 'destroyer']
+  const coords = Number(this.id.slice(6))
+
+  //link board to human.gameboard state??
+
+
+
+}
+
+function clickHumanBoard () {
+  const coords = Number(this.id.slice(6))
+  const shipNames = ['carrier', 'battleship', 'cruiser', 'submarine', 'destroyer']
+  shipNames.forEach((element) => {
+    if(human.gameboard[coords] != 1) {
+      human.placeShip(coords, horizontalBoolean, element)
+      human.shipContainer[element].coordinates.forEach((e) => {
+        let id = `#human-${e}`
+        let div = document.querySelector(id)
+        div.classList.add('human-ship')
+      })
+    } else {
+      return;
+    }
+  })
+  if(human.gameboard[coords] === 1) {
+    return;
+  } else {
+    human.placeShip
+  }
+}
+
+function placeHumanShip (coords, horizontalBoolean, shipName) {
+
+}
+
+function gameOver () {
+  //fireworks and lock up both boards, bring back button but it says restart game
 }
 
 createBothGrids();

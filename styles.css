@@ -22,6 +22,12 @@ body {
   background-color: rgb(81, 94, 216)
 }
 
+.grid .human-ship {
+  background-color: purple;
+}
+.grid .human-ship.ship {
+  background-color: rgb(228, 19, 19)
+}
 .container {
   display: flex;
   flex-wrap: wrap;
