@@ -61,7 +61,6 @@ body {
     background-color: pink;
   }
   .grid {
-    display: grid;
     grid-template-columns: repeat(10, 25px);
     grid-template-rows: repeat(10, 25px);
   }
@@ -81,7 +80,6 @@ body {
   }
 
   .grid {
-    display: grid;
     grid-template-columns: repeat(10, 30px);
     grid-template-rows: repeat(10, 30px);
   }
@@ -102,7 +100,6 @@ body {
   }
 
   .grid {
-    display: grid;
     grid-template-columns: repeat(10, 40px);
     grid-template-rows: repeat(10, 40px);
   }
@@ -124,7 +121,6 @@ body {
   }
 
   .grid {
-    display: grid;
     grid-template-columns: repeat(10, 45px);
     grid-template-rows: repeat(10, 45px);
   }

@@ -3,6 +3,8 @@ import {createShip, createGameboard } from './gameLogic.js'
 // on website load, what do we want this thing to do! we want.... to create our boards (both front/back end) and
 //link them up to each other :)
 const cpu = createGameboard()
+const startBtn = document.querySelector('#start-button')
+startBtn.addEventListener('click', startGame)
 
 function startGame () {
   const human = createGameboard()
@@ -10,6 +12,7 @@ function startGame () {
   let humanTurn = true;
   console.log(cpu)
   initiateComputerBoard();
+  startBtn.classList.toggle('invisible')
 }
 
 function createBothGrids () {
@@ -30,7 +33,7 @@ function createBothGrids () {
 function initiateComputerBoard () {
   const cpuGrid = document.querySelector('.grid-computer')
   const gridCells = cpuGrid.childNodes;
-
+  cpuGrid.classList.toggle('invisible')
   gridCells.forEach((e) => {
     e.addEventListener('click', clickComputerBoard)
   })
@@ -63,6 +66,3 @@ function editInfoContainer (words) {
 }
 
 createBothGrids();
-
-const startBtn = document.querySelector('#start-button')
-startBtn.addEventListener('click', startGame)
