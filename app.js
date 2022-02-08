@@ -4,6 +4,9 @@ import {createShip, createGameboard } from './gameLogic.js'
 //link them up to each other :)
 const cpu = createGameboard()
 const human = createGameboard()
+const shipNames = ['carrier', 'battleship', 'cruiser', 'submarine', 'destroyer']
+let shipName = '';
+
 const startBtn = document.querySelector('#start-button')
 const rotateBtn = document.querySelector('#rotate-button')
 startBtn.addEventListener('click', startGame)
@@ -90,19 +93,17 @@ function hoverHumanBoard () {
 
 function clickHumanBoard () {
   const coords = Number(this.id.slice(6))
-  const shipNames = ['carrier', 'battleship', 'cruiser', 'submarine', 'destroyer']
-  shipNames.forEach((element) => {
-    if(human.placeShip(coords, horizontalBoolean, element) !== 'error') {
-      human.placeShip(coords, horizontalBoolean, element)
-      human.shipContainer[element].coordinates.forEach((e) => {
-        let id = `#human-${e}`
-        let div = document.querySelector(id)
-        div.classList.add('human-ship')
-      })
-    } else {
-      return;
-    }
-  })
+  if(human.placeShip(coords, horizontalBoolean, element) !== 'error') {
+    human.placeShip(coords, horizontalBoolean, element)
+    human.shipContainer[element].coordinates.forEach((e) => {
+      let id = `#human-${e}`
+      let div = document.querySelector(id)
+      div.classList.add('human-ship')
+    })
+  } else {
+    return;
+  }
+
 
 }
 
