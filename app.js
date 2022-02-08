@@ -3,20 +3,24 @@ import {createShip, createGameboard } from './gameLogic.js'
 // on website load, what do we want this thing to do! we want.... to create our boards (both front/back end) and
 //link them up to each other :)
 const cpu = createGameboard()
+const human = createGameboard()
 const startBtn = document.querySelector('#start-button')
+const rotateBtn = document.querySelector('#rotate-button')
 startBtn.addEventListener('click', startGame)
+rotateBtn.addEventListener('click', rotateShip)
+let horizontalBoolean = true;
 
 function startGame () {
-  const human = createGameboard()
   cpu.randomlyPlace();
   let humanTurn = true;
   console.log(cpu)
   initiateComputerBoard();
   startBtn.classList.toggle('invisible')
+  rotateBtn.classList.toggle('invisible')
 }
 
 function createBothGrids () {
-  const human = document.querySelector('.grid-human')
+  const humanGrid = document.querySelector('.grid-human')
   const cpuGrid = document.querySelector('.grid-computer')
   cpuGrid.classList.add('invisible')
   for (let i = 0; i < 100; i++) {
@@ -24,10 +28,16 @@ function createBothGrids () {
     let cpuCell = document.createElement('div');
     humanCell.id = `human-${i}`
     cpuCell.id = `cpu-${i}`
-    human.appendChild(humanCell)
+    //humanCell add Event Listener - on hover, show the
+    humanGrid.appendChild(humanCell)
     cpuGrid.appendChild(cpuCell)
 
   }
+}
+
+function rotateShip () {
+  horizontalBoolean = !horizontalBoolean;
+  return;
 }
 
 function initiateComputerBoard () {
