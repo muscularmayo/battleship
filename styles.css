@@ -58,14 +58,14 @@ body {
   border: 2px solid black;
 }
 
-.invisible {
-  display: none;
-}
-
 .ship-container {
   display: grid;
   grid-template-columns: repeat(5, 45px);
-  grid-template-rows: repeat(5, 45px);
+  grid-template-rows: repeat(9, 45px);
+}
+
+.invisible {
+  display: none;
 }
 
 .ship-container div {
@@ -87,32 +87,32 @@ body {
 #battleship {
   grid-column-start: 1;
   grid-column-end: 5;
-  grid-row-start: 2;
-  grid-row-end: 2;
+  grid-row-start: 3;
+  grid-row-end: 3;
   background-color: rgb(163, 123, 48);
 }
 
 #cruiser {
   grid-column-start: 1;
   grid-column-end: 4;
-  grid-row-start: 3;
-  grid-row-end: 3;
+  grid-row-start: 5;
+  grid-row-end: 5;
   background-color: rgb(209, 209, 6);
 }
 
 #submarine {
   grid-column-start: 1;
   grid-column-end: 4;
-  grid-row-start: 4;
-  grid-row-end: 4;
+  grid-row-start: 7;
+  grid-row-end: 7;
   background-color: rgb(38, 168, 38);
 }
 
 #destroyer {
   grid-column-start: 1;
   grid-column-end: 3;
-  grid-row-start: 5;
-  grid-row-end: 5;
+  grid-row-start: 9;
+  grid-row-end: 9;
   background-color: rgb(55, 132, 168);
 }
 
@@ -127,8 +127,8 @@ body {
 
   .ship-container {
     display: grid;
-    grid-template-columns: repeat(5, 25px);
-    grid-template-rows: repeat(5, 25px);
+    grid-template-columns: repeat(9, 25px);
+    grid-template-rows: repeat(9, 25px);
   }
 
   .container {
@@ -158,8 +158,8 @@ body {
 
   .ship-container {
     display: grid;
-    grid-template-columns: repeat(5, 30px);
-    grid-template-rows: repeat(5, 30px);
+    grid-template-columns: repeat(9, 30px);
+    grid-template-rows: repeat(9, 30px);
   }
 
   .container {
@@ -184,8 +184,8 @@ body {
 
   .ship-container {
     display: grid;
-    grid-template-columns: repeat(5, 30px);
-    grid-template-rows: repeat(5, 30px);
+    grid-template-columns: repeat(9, 30px);
+    grid-template-rows: repeat(9, 30px);
   }
 
   .container {
@@ -211,8 +211,8 @@ body {
 
   .ship-container {
     display: grid;
-    grid-template-columns: repeat(5, 45px);
-    grid-template-rows: repeat(5, 45px);
+    grid-template-columns: repeat(9, 45px);
+    grid-template-rows: repeat(9, 45px);
   }
 
   .container {

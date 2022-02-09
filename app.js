@@ -9,6 +9,7 @@ let shipName = '';
 
 const startBtn = document.querySelector('#start-button')
 const rotateBtn = document.querySelector('#rotate-button')
+const shipGrid = document.querySelector('.ship-container')
 startBtn.addEventListener('click', startGame)
 rotateBtn.addEventListener('click', rotateShip)
 let horizontalBoolean = true;
@@ -20,6 +21,8 @@ function startGame () {
   initiateComputerBoard();
   startBtn.classList.toggle('invisible')
   rotateBtn.classList.toggle('invisible')
+  shipGrid.classList.toggle('invisible')
+
 }
 
 function createBothGrids () {
@@ -109,6 +112,13 @@ function clickHumanBoard () {
 
 function placeHumanShip (coords, horizontalBoolean, shipName) {
 
+}
+
+function onShipClick () {
+  const ship = this.id;
+  // output input constraints exceptions
+  // ultimate output:
+  //   the ship we have selected (id="shipname") is
 }
 
 function gameOver () {
