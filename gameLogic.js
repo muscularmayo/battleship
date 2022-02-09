@@ -124,6 +124,14 @@ function createGameboard () {
     })
   }
 
+  function allPlaced () {
+    //if all the ships are placed return true, else false
+    let allPlacedFlag = false
+    //if
+
+    return allPlacedFlag;
+  }
+
   function recursivelyPlace (shipName) {
     let randomCoord = Math.floor(Math.random() * 100)
     let horizontalBoolean = Math.floor(Math.random() * 2)
