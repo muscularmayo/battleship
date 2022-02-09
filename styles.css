@@ -127,7 +127,6 @@ body {
   }
 
   .ship-container {
-    display: grid;
     grid-template-columns: repeat(9, 25px);
     grid-template-rows: repeat(9, 25px);
   }
@@ -156,7 +155,6 @@ body {
   }
 
   .ship-container {
-    display: grid;
     grid-template-columns: repeat(9, 30px);
     grid-template-rows: repeat(9, 30px);
   }
@@ -181,7 +179,6 @@ body {
   }
 
   .ship-container {
-    display: grid;
     grid-template-columns: repeat(9, 30px);
     grid-template-rows: repeat(9, 30px);
   }
@@ -206,7 +203,6 @@ body {
   }
 
   .ship-container {
-    display: grid;
     grid-template-columns: repeat(9, 45px);
     grid-template-rows: repeat(9, 45px);
   }
