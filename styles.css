@@ -61,13 +61,18 @@ body {
 .invisible {
   display: none;
 }
-/*
+
 .ship-container {
   display: grid;
-  grid-template-columns: repeat(10, 45px);
-  grid-template-rows: repeat(10, 45px);
+  grid-template-columns: repeat(5, 45px);
+  grid-template-rows: repeat(5, 45px);
+}
 
-} */
+.ship-container div {
+  border: 2px;
+  border: 2px solid black;
+  cursor: pointer;
+}
 
 
 #carrier{
@@ -75,24 +80,40 @@ body {
   grid-column-end: 6;
   grid-row-start: 1;
   grid-row-end: 1;
-  background-color: purple;
+  background-color: rgb(214, 90, 90);
 
 }
 
 #battleship {
-  width: 4fr;
+  grid-column-start: 1;
+  grid-column-end: 5;
+  grid-row-start: 2;
+  grid-row-end: 2;
+  background-color: rgb(163, 123, 48);
 }
 
 #cruiser {
-  width: 3fr
+  grid-column-start: 1;
+  grid-column-end: 4;
+  grid-row-start: 3;
+  grid-row-end: 3;
+  background-color: rgb(209, 209, 6);
 }
 
 #submarine {
-  width: 3fr;
+  grid-column-start: 1;
+  grid-column-end: 4;
+  grid-row-start: 4;
+  grid-row-end: 4;
+  background-color: rgb(38, 168, 38);
 }
 
 #destroyer {
-  width: 2fr;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 5;
+  grid-row-end: 5;
+  background-color: rgb(55, 132, 168);
 }
 
 @media only screen and (max-width: 320px) {
@@ -103,6 +124,13 @@ body {
     grid-template-columns: repeat(10, 25px);
     grid-template-rows: repeat(10, 25px);
   }
+
+  .ship-container {
+    display: grid;
+    grid-template-columns: repeat(5, 25px);
+    grid-template-rows: repeat(5, 25px);
+  }
+
   .container {
     display: flex;
     flex-wrap: wrap;
@@ -128,6 +156,12 @@ body {
     grid-template-rows: repeat(10, 30px);
   }
 
+  .ship-container {
+    display: grid;
+    grid-template-columns: repeat(5, 30px);
+    grid-template-rows: repeat(5, 30px);
+  }
+
   .container {
     display: flex;
     flex-wrap: wrap;
@@ -144,8 +178,14 @@ body {
   }
 
   .grid {
-    grid-template-columns: repeat(10, 40px);
-    grid-template-rows: repeat(10, 40px);
+    grid-template-columns: repeat(10, 30px);
+    grid-template-rows: repeat(10, 30px);
+  }
+
+  .ship-container {
+    display: grid;
+    grid-template-columns: repeat(5, 30px);
+    grid-template-rows: repeat(5, 30px);
   }
 
   .container {
@@ -161,12 +201,18 @@ body {
 
 @media only screen and (min-width: 1066px) {
   body {
-    background-color:yellow;
+    background-color:rgb(129, 36, 106);
   }
 
   .grid {
     grid-template-columns: repeat(10, 45px);
     grid-template-rows: repeat(10, 45px);
+  }
+
+  .ship-container {
+    display: grid;
+    grid-template-columns: repeat(5, 45px);
+    grid-template-rows: repeat(5, 45px);
   }
 
   .container {
@@ -176,5 +222,18 @@ body {
     padding: 0px;
     margin: 50px;
     grid-gap: 100px;
+  }
+
+  h3 {
+    color: white;
+  }
+
+  h2 {
+    color: white
+  }
+
+  button {
+    background-color: rgb(95, 26, 78);
+    color: white
   }
 }
