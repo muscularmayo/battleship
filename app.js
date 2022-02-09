@@ -118,7 +118,21 @@ function onShipClick () {
   const ship = this.id;
   // output input constraints exceptions
   // ultimate output:
-  //   the ship we have selected (id="shipname") is
+  //   the ship we have selected (id="shipname") is now an argument for placeShip()
+  //   rotateboolean is also a argument
+  //   final argument is coords, and that is going to be the currently hovered
+}
+
+function placeShipHover () {
+  if (horizontalBoolean) {
+
+  } else {
+
+  }
+}
+
+function placeShipClick () {
+
 }
 
 function gameOver () {

@@ -28,21 +28,20 @@ body {
 .grid .human-ship.ship {
   background-color: rgb(228, 19, 19)
 }
+
 .container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   padding: 0px;
   margin: 10px;
-  grid-gap: 30px;
+  grid-gap: 20px;
 }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(10, 45px) ;
   grid-template-rows: repeat(10, 45px);
-
-
 }
 
 .hidden-info {
@@ -55,7 +54,7 @@ body {
 .grid div{
   cursor: pointer;
   background-color: #d9d9d9;
-  border: 2px solid black;
+  border: 1px solid black;
 }
 
 .ship-container {
@@ -69,8 +68,7 @@ body {
 }
 
 .ship-container div {
-  border: 2px;
-  border: 2px solid black;
+  border: 1px solid black;
   cursor: pointer;
 }
 
@@ -81,7 +79,10 @@ body {
   grid-row-start: 1;
   grid-row-end: 1;
   background-color: rgb(214, 90, 90);
+}
 
+.ship-hover {
+  background-color: rgb(37, 42, 43)
 }
 
 #battleship {
@@ -136,8 +137,6 @@ body {
     flex-wrap: wrap;
     justify-content: center;
     padding: 0px;
-    margin: 10px;
-    grid-gap: 25px;
   }
 
 
@@ -167,8 +166,7 @@ body {
     flex-wrap: wrap;
     justify-content: center;
     padding: 0px;
-    margin: 10px;
-    grid-gap: 25px;
+
   }
 }
 
@@ -193,15 +191,13 @@ body {
     flex-wrap: wrap;
     justify-content: center;
     padding: 0px;
-    margin: 10px;
-    grid-gap: 25px;
   }
 }
 
 
 @media only screen and (min-width: 1066px) {
   body {
-    background-color:rgb(129, 36, 106);
+    background-color:rgb(151, 45, 125);
   }
 
   .grid {
@@ -220,8 +216,6 @@ body {
     flex-wrap: nowrap;
     justify-content: center;
     padding: 0px;
-    margin: 50px;
-    grid-gap: 100px;
   }
 
   h3 {
