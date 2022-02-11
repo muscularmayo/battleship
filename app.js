@@ -100,9 +100,9 @@ function hoverHumanBoard () {
 
 function clickHumanBoard () {
   const coords = Number(this.id.slice(6))
-  if(human.placeShip(coords, horizontalBoolean, element) !== 'error') {
-    human.placeShip(coords, horizontalBoolean, element)
-    human.shipContainer[element].coordinates.forEach((e) => {
+  if(human.placeShip(coords, horizontalBoolean, shipName) !== 'error') {
+    human.placeShip(coords, horizontalBoolean, shipName)
+    human.shipContainer[shipName].coordinates.forEach((e) => {
       let id = `#human-${e}`
       let div = document.querySelector(id)
       div.classList.add('human-ship')
@@ -151,6 +151,7 @@ function lockBoard(human) {
 
 function onShipClick () {
   const ship = this.classList.item(0);
+  shipName = ship;
   // output input constraints exceptions
   // ultimate output:
   //   the ship we have selected (id="shipname") is now an argument for placeShip()
@@ -180,4 +181,13 @@ function gameOver () {
   //fireworks and lock up both boards, bring back button but it says restart game
 }
 
+function initiateShipContainer () {
+  const ships = document.querySelector('.ship-container')
+  ships.childNodes.forEach((e) => {
+    e.addEventListener('click', onShipClick)
+  })
+
+}
+
 createBothGrids();
+initiateShipContainer();
