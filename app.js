@@ -106,16 +106,17 @@ function clickHumanBoard () {
         let id = `#human-${e}`
         let div = document.querySelector(id)
         div.classList.toggle('human-ship')
-    })
-  }
+      })
+    }
     human.placeShip(coords, horizontalBoolean, shipName)
     human.shipContainer[shipName].coordinates.forEach((e) => {
       let id = `#human-${e}`
       let div = document.querySelector(id)
       div.classList.add('human-ship')
     })
+    document.querySelector(`.${shipName}`).style.backgroundColor = 'white'
   } else {
-    return;
+    return 'error';
   }
 }
 

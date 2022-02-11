@@ -127,7 +127,7 @@ function createGameboard () {
   function allPlaced () {
     //if all the ships are placed return true, else false
     let allPlacedFlag = false
-    //if
+    Object.values(this.shipContainer)
 
     return allPlacedFlag;
   }
