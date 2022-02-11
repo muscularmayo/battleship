@@ -101,6 +101,13 @@ function hoverHumanBoard () {
 function clickHumanBoard () {
   const coords = Number(this.id.slice(6))
   if(human.placeShip(coords, horizontalBoolean, shipName) !== 'error') {
+    if (human.shipContainer[shipName].coordinates.length > 0) {
+      human.shipContainer[shipName].coordinates.forEach((e) => {
+        let id = `#human-${e}`
+        let div = document.querySelector(id)
+        div.classList.toggle('human-ship')
+    })
+  }
     human.placeShip(coords, horizontalBoolean, shipName)
     human.shipContainer[shipName].coordinates.forEach((e) => {
       let id = `#human-${e}`
