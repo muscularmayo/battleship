@@ -106,6 +106,7 @@ function clickHumanBoard () {
         let id = `#human-${e}`
         let div = document.querySelector(id)
         div.classList.toggle('human-ship')
+
       })
     }
     human.placeShip(coords, horizontalBoolean, shipName)
@@ -159,7 +160,26 @@ function lockBoard(human) {
 
 function onShipClick () {
   const ship = this.classList.item(0);
+  if (shipName === ship) {
+    return;
+  }
   shipName = ship;
+  document.querySelector(`.${ship}`).style.backgroundColor = 'aqua'
+
+  if(human.shipContainer[ship].coordinates.length > 0) {
+    human.shipContainer[ship].coordinates.forEach((e) => {
+      document.querySelector(`#human-${e}`).classlist.toggle('used')
+    })
+  }
+
+  //if this ship has coordinates already, we want to highlight those coordinates by turning them white
+  // if (human.shipContainer[ship].coordinates.length > 0) {
+  //   human.shipContainer[ship].coordinates.forEach((e) => {
+  //     document.querySelector(`#human-${e}`).style.backgroundColor = 'white'
+  //   })
+  // }
+
+
   // output input constraints exceptions
   // ultimate output:
   //   the ship we have selected (id="shipname") is now an argument for placeShip()

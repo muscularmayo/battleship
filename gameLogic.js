@@ -127,7 +127,9 @@ function createGameboard () {
   function allPlaced () {
     //if all the ships are placed return true, else false
     let allPlacedFlag = false
-    Object.values(this.shipContainer)
+    allPlacedFlag = Object.values(this.shipContainer).every((e) => {
+      return e.coordinates.length > 0;
+    })
 
     return allPlacedFlag;
   }
@@ -219,7 +221,7 @@ function createGameboard () {
     return sunkFlag;
   }
 
-  return { gameboard , placeShip, shipContainer, receiveAttack, allSunk, randomlyPlace, checkPlacement};
+  return { gameboard , placeShip, shipContainer, receiveAttack, allSunk, randomlyPlace, checkPlacement, allPlaced};
 }
 
 

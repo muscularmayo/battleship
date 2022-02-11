@@ -324,9 +324,9 @@ describe('createGameboard creates a gameboard with functions/containers', () => 
   })
 
   test('allPlaced is a function that checks if all the ships are placed on this gameboard', () => {
-    expect(gameboard.allSunk()).toBe(false)
+    expect(gameboard.allPlaced()).toBe(false)
     gameboard.randomlyPlace();
-    expect(gameboard.allSunk()).toBe(true)
+    expect(gameboard.allPlaced()).toBe(true)
   })
 
 })
