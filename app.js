@@ -100,7 +100,7 @@ function hoverHumanBoard () {
 
 function clickHumanBoard () {
   const coords = Number(this.id.slice(6))
-  if(human.placeShip(coords, horizontalBoolean, shipName) !== 'error') {
+  if(human.checkPlacement(coords, horizontalBoolean, shipName)) {
     if (human.shipContainer[shipName].coordinates.length > 0) {
       human.shipContainer[shipName].coordinates.forEach((e) => {
         let id = `#human-${e}`

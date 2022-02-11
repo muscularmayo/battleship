@@ -177,6 +177,9 @@ function createGameboard () {
     // }
   }
   function checkPlacement (coords, horizontal, shipLength) {
+    if (typeof shipLength === 'string') {
+      shipLength = this.shipContainer[shipLength].length;
+    }
     if(horizontal) {
       //console.log(gameboard, coords)
       //we check if our column number (coord%10) <= (10 - shipLength)
@@ -216,7 +219,7 @@ function createGameboard () {
     return sunkFlag;
   }
 
-  return { gameboard , placeShip, shipContainer, receiveAttack, allSunk, randomlyPlace};
+  return { gameboard , placeShip, shipContainer, receiveAttack, allSunk, randomlyPlace, checkPlacement};
 }
 
 
