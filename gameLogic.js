@@ -205,6 +205,7 @@ function createGameboard () {
       //if it is it's good, else it's bad
       //check if every spot is currently at 0, if it's not 0 then bad
     }
+    return false;
   }
 
   function allSunk() {

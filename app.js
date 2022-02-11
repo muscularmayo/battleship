@@ -6,7 +6,9 @@ const cpu = createGameboard()
 const human = createGameboard()
 const shipNames = ['carrier', 'battleship', 'cruiser', 'submarine', 'destroyer']
 let shipName = '';
+let humanTurn = false;
 
+const turnDiv = document.querySelector('#whose-turn')
 const startBtn = document.querySelector('#start-button')
 const rotateBtn = document.querySelector('#rotate-button')
 const shipGrid = document.querySelector('.ship-container')
@@ -16,13 +18,13 @@ let horizontalBoolean = true;
 
 function startGame () {
   cpu.randomlyPlace();
-  let humanTurn = true;
   console.log(cpu)
   initiateComputerBoard();
   startBtn.classList.toggle('invisible')
   rotateBtn.classList.toggle('invisible')
   shipGrid.classList.toggle('invisible')
-
+  toggleTurn()
+  lockBoard(true)
 }
 
 function createBothGrids () {
@@ -69,6 +71,8 @@ function clickComputerBoard () {
     console.log(cpu.shipContainer)
     if (cpu.allSunk()) {
       editInfoContainer('You have won!')
+      toggleTurn(true)
+      lockBoard(false)
         //this will be converted to changing the h1 info area
     }
   } else {
@@ -106,16 +110,47 @@ function clickHumanBoard () {
   } else {
     return;
   }
-
-
 }
+
+function toggleTurn (end) {
+  if(end) {
+    turnDiv.innerText = ''
+    return
+  }
+  humanTurn = !humanTurn;
+  if (humanTurn === true) {
+    turnDiv.innerText = 'Your turn'
+  } else {
+    turnDiv.innerText = 'Computer turn'
+  }
+}
+
+
 
 function placeHumanShip (coords, horizontalBoolean, shipName) {
 
 }
 
+function lockBoard(human) {
+  if (human) {
+    const humanGrid = document.querySelector('.grid-human')
+    const gridCells = humanGrid.childNodes;
+    gridCells.forEach((e) => {
+      e.removeEventListener('click', clickHumanBoard)
+    })
+
+  } else {
+    //lock computer board
+    const cpuGrid = document.querySelector('.grid-computer')
+    const gridCells = cpuGrid.childNodes;
+    gridCells.forEach((e) => {
+      e.removeEventListener('click', clickComputerBoard)
+    })
+  }
+}
+
 function onShipClick () {
-  const ship = this.id;
+  const ship = this.classList.item(0);
   // output input constraints exceptions
   // ultimate output:
   //   the ship we have selected (id="shipname") is now an argument for placeShip()
@@ -123,12 +158,18 @@ function onShipClick () {
   //   final argument is coords, and that is going to be the currently hovered
 }
 
-function placeShipHover () {
+function placeShipHoverIn () {
+  //if(human.placeShip() == 'error')
+  //   get the fudge outta here
   if (horizontalBoolean) {
 
   } else {
 
   }
+}
+
+function placeShipHoverOut () {
+
 }
 
 function placeShipClick () {
