@@ -5,6 +5,8 @@ import {createShip, createGameboard } from './gameLogic.js'
 const cpu = createGameboard()
 const human = createGameboard()
 const shipNames = ['carrier', 'battleship', 'cruiser', 'submarine', 'destroyer']
+const computerAttackedSpaces = [];
+let computerHit = -1;
 let shipName = '';
 let humanTurn = false;
 
@@ -77,7 +79,7 @@ function clickComputerBoard () {
     console.log(cpu.shipContainer)
     if (cpu.allSunk()) {
       editInfoContainer('You have won!')
-      toggleTurn(true)
+      lockBoard(true)
       lockBoard(false)
         //this will be converted to changing the h1 info area
     }
@@ -85,6 +87,7 @@ function clickComputerBoard () {
     this.classList.add('not-ship')
     cpu.receiveAttack(coords)
   }
+  computerAttack()
 }
 
 function editInfoContainer (words) {
@@ -97,11 +100,7 @@ function hoverHumanBoard () {
   //mouseover and mouseout
   const shipNames = ['carrier', 'battleship', 'cruiser', 'submarine', 'destroyer']
   const coords = Number(this.id.slice(6))
-
   //link board to human.gameboard state??
-
-
-
 }
 
 function clickHumanBoard () {
@@ -146,7 +145,41 @@ function toggleTurn (end) {
 
 
 
-function placeHumanShip (coords, horizontalBoolean, shipName) {
+function computerAttack () {
+  //[] < containing all coordinates of attacks
+  //
+  let coords;
+
+  if (computerHit !== -1) {
+    const directions = [-10, 10, -1, 1] //up down left right
+    //0-99
+    //we want to set coords to either computerHit+1, -1, +10, -10
+    let choice = directions[Math.floor(Math.random() * 4)]
+    coords = computerHit + choice
+    if(human.gameboard[coords] === -1) {
+      console.log(coords)
+      computerAttack ()
+    }
+    human.receiveAttack(coords)
+  } else {
+    coords = Math.floor(Math.random() * 100)
+    human.receiveAttack(coords)
+  }
+  console.log(coords)
+
+
+  if (human.gameboard[coords] === -1) {
+    document.querySelector(`#human-${coords}`).classList.add('ship')
+    if (human.allSunk()) {
+      editInfoContainer('You have lost!')
+      lockBoard(true)
+      lockBoard(false)
+        //this will be converted to changing the h1 info area
+    }
+    computerHit = coords;
+  } else {
+    document.querySelector(`#human-${coords}`).classList.add('not-ship')
+  }
 
 }
 

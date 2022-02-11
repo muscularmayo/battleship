@@ -146,7 +146,9 @@ function createGameboard () {
 
   function receiveAttack (coords) {
     // receive an input of 0-99, representing coords on my array
-
+    if(gameboard[coords] === -1 || gameboard[coords] === -2) {
+      return 'error'
+    }
     if(gameboard[coords] === 1) {
       Object.values(this.shipContainer).forEach(element => {
         if (element.coordinates.includes(coords)) {
