@@ -99,6 +99,7 @@ function hoverHumanBoard () {
 }
 
 function clickHumanBoard () {
+  clearWhiteBoardSpaces();
   const coords = Number(this.id.slice(6))
   if(human.checkPlacement(coords, horizontalBoolean, shipName)) {
     if (human.shipContainer[shipName].coordinates.length > 0) {
@@ -158,17 +159,35 @@ function lockBoard(human) {
   }
 }
 
+function clearWhiteBoardSpaces () {
+  for(let i = 0; i < 100; i++) {
+    let boardSpot = document.querySelector(`#human-${i}`);
+    boardSpot.style.backgroundColor = ''
+  }
+  return;
+}
+
 function onShipClick () {
+  //previous ship is currently shipName, so we access it and make it white
   const ship = this.classList.item(0);
   if (shipName === ship) {
     return;
+  }
+  clearWhiteBoardSpaces();
+
+  if (shipName !== '') {
+    if(human.shipContainer[shipName].coordinates.length === 0) {
+      document.querySelector(`.${shipName}`).style.backgroundColor = ''
+    } else {
+      document.querySelector(`.${shipName}`).style.backgroundColor = 'white'
+    }
   }
   shipName = ship;
   document.querySelector(`.${ship}`).style.backgroundColor = 'aqua'
 
   if(human.shipContainer[ship].coordinates.length > 0) {
     human.shipContainer[ship].coordinates.forEach((e) => {
-      document.querySelector(`#human-${e}`).classlist.toggle('used')
+      document.querySelector(`#human-${e}`).style.backgroundColor = 'white'
     })
   }
 
