@@ -25,6 +25,7 @@ function startGame () {
   shipGrid.classList.toggle('invisible')
   toggleTurn()
   lockBoard(true)
+  editInfoContainer('')
 }
 
 function createBothGrids () {
@@ -46,6 +47,11 @@ function createBothGrids () {
 
 function rotateShip () {
   horizontalBoolean = !horizontalBoolean;
+  if(horizontalBoolean) {
+    editInfoContainer('Place your ships horizontally')
+  } else {
+    editInfoContainer('Place your ships vertically')
+  }
   return;
 }
 
@@ -116,9 +122,12 @@ function clickHumanBoard () {
       let div = document.querySelector(id)
       div.classList.add('human-ship')
     })
-    document.querySelector(`.${shipName}`).style.backgroundColor = 'white'
   } else {
     return 'error';
+  }
+
+  if(human.allPlaced()) {
+    document.querySelector('#start-button').classList.remove('invisible')
   }
 }
 
@@ -173,6 +182,7 @@ function onShipClick () {
   if (shipName === ship) {
     return;
   }
+
   clearWhiteBoardSpaces();
 
   if (shipName !== '') {
@@ -238,3 +248,4 @@ function initiateShipContainer () {
 
 createBothGrids();
 initiateShipContainer();
+
