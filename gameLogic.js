@@ -1,3 +1,4 @@
+
 function createShip (shipName) {
   let length;
   if(shipName === 'destroyer') {
@@ -155,6 +156,7 @@ function createGameboard () {
           element.hit(coords)
           if(element.isSunk()) {
             console.log(`${element.shipName} has sunk!`)
+
             return `${element} has sunk!`
           }
         }

@@ -7,18 +7,25 @@ const human = createGameboard()
 const shipNames = ['carrier', 'battleship', 'cruiser', 'submarine', 'destroyer']
 const computerAttackedSpaces = [];
 let computerHit = -1;
+let previousHit = -1;
+let firstHit = -1
+let directional = 0
 let shipName = '';
 let humanTurn = false;
+let firstHitFlag = false;
 
 const turnDiv = document.querySelector('#whose-turn')
 const startBtn = document.querySelector('#start-button')
 const rotateBtn = document.querySelector('#rotate-button')
 const shipGrid = document.querySelector('.ship-container')
+const restartBtn = document.querySelector('#restart-game')
 startBtn.addEventListener('click', startGame)
 rotateBtn.addEventListener('click', rotateShip)
+restartBtn.addEventListener('click', restartGame)
 let horizontalBoolean = true;
 
 function startGame () {
+  clearWhiteBoardSpaces()
   cpu.randomlyPlace();
   console.log(cpu)
   initiateComputerBoard();
@@ -28,6 +35,10 @@ function startGame () {
   toggleTurn()
   lockBoard(true)
   editInfoContainer('')
+}
+
+function restartGame () {
+  window.location.reload();
 }
 
 function createBothGrids () {
@@ -89,6 +100,7 @@ function clickComputerBoard () {
       editInfoContainer('You have won!')
       lockBoard(true)
       lockBoard(false)
+      restartBtn.classList.toggle('invisible')
         //this will be converted to changing the h1 info area
     }
   } else {
@@ -151,35 +163,62 @@ function toggleTurn (end) {
   }
 }
 
-
+function recursivelyFindCoordinates () {
+  let x = Math.floor(Math.random() * 100)
+  if (computerAttackedSpaces.includes(x)) {
+    return recursivelyFindCoordinates();
+  } else {
+    return x;
+  }
+}
 
 function computerAttack () {
   //[] < containing all coordinates of attacks
   //
   let coords;
-
-  if (computerHit !== -1) {
+  let choice;
+  if (computerHit !== -1 && previousHit === -1) {
     const directions = [-10, 10, -1, 1] //up down left right
-    //0-99
-    //we want to set coords to either computerHit+1, -1, +10, -10
-    if(cpu.gameboard[coords - 10] < 0 || cpu.gameboard[coords + 10] < 0 || cpu.gameboard[coords+1] < 0 || cpu.gameboard[coords-1]) {
-      directions = [-20, 20, -2, 2]
+    if (firstHit === -1) {
+      firstHit = computerHit;
     }
-    let choice = directions[Math.floor(Math.random() * 4)]
+    //0-99
+    //we want to set coords to either computerHit +1, -1, +10, -10
+    choice = directions[Math.floor(Math.random() * 4)]
     coords = computerHit + choice
-    if(human.gameboard[coords] === -1 || computerAttackedSpaces.includes(coords)) {
+    if(human.gameboard[coords] === -1 || computerAttackedSpaces.includes(coords) || coords > 99 || coords < 0) {
       console.log(coords)
       computerAttack ()
     }
     human.receiveAttack(coords)
-  } else {
-    coords = Math.floor(Math.random() * 100)
-    if (computerAttackedSpaces.includes(coords)) {
-      computerAttack()
-    }
+  }  else if (computerHit !== -1 && previousHit !== -1 && !firstHitFlag) {
+      choice = computerHit - previousHit;
+      coords = computerHit + choice;
+      if(human.gameboard[coords] === -2) {
+        firstHitFlag = true;
+        computerAttackedSpaces.push(coords)
+        computerAttack();
+      }
+      human.receiveAttack(coords)
+      if(human.gameboard[coords] !== -1) {
+        firstHitFlag = true;
+      }
+  } else if (firstHitFlag) {
+    choice = -1 * (computerHit - previousHit)
+    coords = firstHit + choice;
+    computerHit = firstHit;
+
+    // if (choice !== -10 || choice !== 10 || choice !== 1 || choice !== -1) {
+    //   coords =
+    // }
     human.receiveAttack(coords)
-    computerAttackedSpaces.push(coords)
+    firstHitFlag = false;
+  } else {
+    coords = recursivelyFindCoordinates();
+    human.receiveAttack(coords)
   }
+
+  computerAttackedSpaces.push(coords)
   console.log(coords)
 
 
@@ -190,12 +229,42 @@ function computerAttack () {
       lockBoard(true)
       lockBoard(false)
       toggleTurn(true)
+      restartBtn.classList.toggle('invisible')
         //this will be converted to changing the h1 info area
     }
+    if (computerHit === -1) {
+      firstHit = coords;
+    }
+    previousHit = computerHit;
     computerHit = coords;
+    Object.values(human.shipContainer).forEach( (element) => {
+      if(element.coordinates.includes(coords)){
+        if(element.isSunk()) {
+          previousHit = -1
+          computerHit = -1
+          firstHit = -1
+          firstHitFlag = false;
+        }
+      }
+    })
+    // if(gameboard[coords] === 1) {
+    //   Object.values(this.shipContainer).forEach(element => {
+    //     if (element.coordinates.includes(coords)) {
+    //       element.hit(coords)
+    //       if(element.isSunk()) {
+    //         console.log(`${element.shipName} has sunk!`)
+
+    //         return `${element} has sunk!`
+    //       }
+    //     }
+    //   })
+    // }
   } else {
     document.querySelector(`#human-${coords}`).classList.add('not-ship')
+
   }
+
+
 
 }
 
