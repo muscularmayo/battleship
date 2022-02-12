@@ -50,9 +50,17 @@ function createBothGrids () {
 function rotateShip () {
   horizontalBoolean = !horizontalBoolean;
   if(horizontalBoolean) {
-    editInfoContainer('Place your ships horizontally')
+    if (shipName == '') {
+      editInfoContainer('Place your ships horizontally')
+    } else {
+      editInfoContainer(`Place your ${shipName} horizontally`)
+    }
   } else {
-    editInfoContainer('Place your ships vertically')
+    if(shipName === '') {
+      editInfoContainer('Place your ships vertically')
+    } else {
+      editInfoContainer(`Place your ${shipName} vertically`)
+    }
   }
   return;
 }
@@ -154,16 +162,23 @@ function computerAttack () {
     const directions = [-10, 10, -1, 1] //up down left right
     //0-99
     //we want to set coords to either computerHit+1, -1, +10, -10
+    if(cpu.gameboard[coords - 10] < 0 || cpu.gameboard[coords + 10] < 0 || cpu.gameboard[coords+1] < 0 || cpu.gameboard[coords-1]) {
+      directions = [-20, 20, -2, 2]
+    }
     let choice = directions[Math.floor(Math.random() * 4)]
     coords = computerHit + choice
-    if(human.gameboard[coords] === -1) {
+    if(human.gameboard[coords] === -1 || computerAttackedSpaces.includes(coords)) {
       console.log(coords)
       computerAttack ()
     }
     human.receiveAttack(coords)
   } else {
     coords = Math.floor(Math.random() * 100)
+    if (computerAttackedSpaces.includes(coords)) {
+      computerAttack()
+    }
     human.receiveAttack(coords)
+    computerAttackedSpaces.push(coords)
   }
   console.log(coords)
 
@@ -174,6 +189,7 @@ function computerAttack () {
       editInfoContainer('You have lost!')
       lockBoard(true)
       lockBoard(false)
+      toggleTurn(true)
         //this will be converted to changing the h1 info area
     }
     computerHit = coords;
@@ -226,6 +242,8 @@ function onShipClick () {
     }
   }
   shipName = ship;
+  horizontalBoolean ? editInfoContainer(`Place your ${shipName} horizontally`) : editInfoContainer(`Place your ${shipName} vertically`)
+
   document.querySelector(`.${ship}`).style.backgroundColor = 'aqua'
 
   if(human.shipContainer[ship].coordinates.length > 0) {
