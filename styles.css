@@ -14,12 +14,12 @@ h3 {
 }
 
 h2 {
-  color: white
+  color: white;
+  text-align:center;
 }
 
 #info, #whose-turn {
   margin: 2px;
-
 }
 
 .grid .ship {
